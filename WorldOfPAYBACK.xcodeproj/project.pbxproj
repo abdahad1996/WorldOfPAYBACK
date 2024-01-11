@@ -12,6 +12,8 @@
 		54AA473C2B50997200CF6AD1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA473B2B50997200CF6AD1 /* ViewController.swift */; };
 		54AA47412B50997300CF6AD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AA47402B50997300CF6AD1 /* Assets.xcassets */; };
 		54AA47442B50997300CF6AD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AA47422B50997300CF6AD1 /* LaunchScreen.storyboard */; };
+		54AA474E2B509BEE00CF6AD1 /* TransactionLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA474C2B509BEE00CF6AD1 /* TransactionLoader.swift */; };
+		54AA474F2B509BEE00CF6AD1 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA474D2B509BEE00CF6AD1 /* Transaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		54AA47402B50997300CF6AD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54AA47432B50997300CF6AD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54AA47452B50997300CF6AD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54AA474C2B509BEE00CF6AD1 /* TransactionLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionLoader.swift; sourceTree = "<group>"; };
+		54AA474D2B509BEE00CF6AD1 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		54AA47362B50997200CF6AD1 /* WorldOfPAYBACK */ = {
 			isa = PBXGroup;
 			children = (
+				54AA474B2B509BEE00CF6AD1 /* Transaction Feature */,
 				54AA47372B50997200CF6AD1 /* AppDelegate.swift */,
 				54AA47392B50997200CF6AD1 /* SceneDelegate.swift */,
 				54AA473B2B50997200CF6AD1 /* ViewController.swift */,
@@ -62,6 +67,15 @@
 				54AA47452B50997300CF6AD1 /* Info.plist */,
 			);
 			path = WorldOfPAYBACK;
+			sourceTree = "<group>";
+		};
+		54AA474B2B509BEE00CF6AD1 /* Transaction Feature */ = {
+			isa = PBXGroup;
+			children = (
+				54AA474C2B509BEE00CF6AD1 /* TransactionLoader.swift */,
+				54AA474D2B509BEE00CF6AD1 /* Transaction.swift */,
+			);
+			path = "Transaction Feature";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +151,8 @@
 				54AA473C2B50997200CF6AD1 /* ViewController.swift in Sources */,
 				54AA47382B50997200CF6AD1 /* AppDelegate.swift in Sources */,
 				54AA473A2B50997200CF6AD1 /* SceneDelegate.swift in Sources */,
+				54AA474E2B509BEE00CF6AD1 /* TransactionLoader.swift in Sources */,
+				54AA474F2B509BEE00CF6AD1 /* Transaction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
