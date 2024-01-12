@@ -9,10 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let t = RemoteTransactionLoader(url: anyURL(), client: JSONHTTPClient())
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .red
-        // Do any additional setup after loading the view.
+ 
     }
 
 

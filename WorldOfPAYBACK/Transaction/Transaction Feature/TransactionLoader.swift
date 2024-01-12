@@ -8,18 +8,19 @@
 import Foundation
 
 public protocol TransactionLoader {
-    typealias Result = Swift.Result<[Transaction], Error>
+    typealias Result = Swift.Result<[TransactionItem], Error>
     
-    func load(from url:URL) async throws -> [Transaction]
-    func load(from url:URL,completion: @escaping (Result) -> Void)
+    func load() async throws -> [TransactionItem]
+    func load(completion: @escaping (Result) -> Void)
 }
+
 extension TransactionLoader {
-    func load(from url:URL) async throws -> [Transaction] {
+    public func load() async throws -> [TransactionItem] {
         return try await withCheckedThrowingContinuation { continuation in
-            self.load(from: url) { result in
+            self.load{ result in
                 switch result {
-                case .success(let transaction):
-                    continuation.resume(with: .success(transaction))
+                case .success(let transactionItem):
+                    continuation.resume(with: .success(transactionItem))
                 case .failure(let err):
                     continuation.resume(throwing: err)
                 }
