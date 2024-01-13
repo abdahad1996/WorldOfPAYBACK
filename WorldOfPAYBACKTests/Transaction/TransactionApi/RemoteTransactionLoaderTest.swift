@@ -10,7 +10,7 @@ import WorldOfPAYBACK
 
 
 final class RemoteTransactionLoaderTest: XCTestCase {
-
+    
     func test_Init_DoesNotRequestDataFromUrl(){
         let (_,client) = makeSUT()
         
@@ -37,7 +37,7 @@ final class RemoteTransactionLoaderTest: XCTestCase {
         
         sut.load{ _ in }
         sut.load{ _ in }
-
+        
         
         XCTAssertEqual(client.requestedUrls,[givenUrl,givenUrl])
     }
@@ -45,150 +45,69 @@ final class RemoteTransactionLoaderTest: XCTestCase {
     func test_load_DeliversErrorOnClientError(){
         let (sut,client) = makeSUT()
         
-        var expectedResult:RemoteTransactionLoader.Result = .failure(RemoteTransactionLoader.Error.connectivity)
-        let exp = expectation(description: "Wait for load completion")
-
-        sut.load { recievedResult in
-            switch (recievedResult,expectedResult){
-            case let (.success(recievedItems),.success(expectedItems)): break
-            case let (.failure(recievedError as RemoteTransactionLoader.Error),.failure(expectedError as RemoteTransactionLoader.Error)):
-                XCTAssertEqual(recievedError, expectedError)
-            default:
-                XCTFail("Expected result \(expectedResult) got \(recievedResult) instead")
-            }
-                
-            }
-            exp.fulfill()
-
+        expect(sut: sut, expectedResult: .failure(RemoteTransactionLoader.Error.connectivity)) {
+            let clientError = NSError(domain: "Test", code: 0)
+            client.complete(with: clientError)
+        }
         
-        
-        
-        let clientError = NSError(domain: "Test", code: 0)
-        client.complete(with: clientError)
-        wait(for: [exp], timeout: 1.0)
-
     }
     
     func test_load_DeliversErrorOnNon200Error(){
         let (sut,client) = makeSUT()
         
-        
         let samples = [100,201,300,400,500]
         samples.enumerated().forEach{ index, code in
             
-            var expectedResult:RemoteTransactionLoader.Result = .failure(RemoteTransactionLoader.Error.invalidData)
-            let exp = expectation(description: "Wait for load completion")
-
-            sut.load { recievedResult in
-                switch (recievedResult,expectedResult){
-                case let (.success(recievedItems),.success(expectedItems)):
-                    XCTFail("Expected result \(expectedResult) got \(recievedResult) instead")
-                case let (.failure(recievedError as RemoteTransactionLoader.Error),.failure(expectedError as RemoteTransactionLoader.Error)):
-                    XCTAssertEqual(recievedError, expectedError)
-                default:
-                    XCTFail("Expected result \(expectedResult) got \(recievedResult) instead")
-                }
-                    
-                }
-                exp.fulfill()
-
+            
+            expect(sut: sut, expectedResult: .failure(RemoteTransactionLoader.Error.invalidData)) {
+                client.complete(withStatusCode: code, at:index, data: makeItemsJSON([]))
+            }
             
             
-            
-            let clientError = NSError(domain: "Test", code: 0)
-            client.complete(withStatusCode: code, at:index, data: makeItemsJSON([]))
-            wait(for: [exp], timeout: 1.0)
         }
         
-
+        
     }
     
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         
         let (sut,client) = makeSUT()
         
-        var expectedResult:RemoteTransactionLoader.Result = .failure(RemoteTransactionLoader.Error.invalidData)
-        let exp = expectation(description: "Wait for load completion")
-
-        sut.load { recievedResult in
-            switch (recievedResult,expectedResult){
-            case let (.success(recievedItems),.success(expectedItems)): break
-            case let (.failure(recievedError as RemoteTransactionLoader.Error),.failure(expectedError as RemoteTransactionLoader.Error)):
-                XCTAssertEqual(recievedError, expectedError)
-            default:
-                XCTFail("Expected result \(expectedResult) got \(recievedResult) instead")
-            }
-                
-            }
-            exp.fulfill()
-
+        expect(sut: sut, expectedResult: .failure(RemoteTransactionLoader.Error.invalidData)) {
+            let invalidJSON = Data("invalid json".utf8)
+            client.complete(withStatusCode: 200, data: invalidJSON)
+        }
         
         
         
-        let invalidJSON = Data("invalid json".utf8)
-        client.complete(withStatusCode: 200, data: invalidJSON)
-        wait(for: [exp], timeout: 1.0)
         
     }
     
     func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
-
-        var expectedResult:RemoteTransactionLoader.Result = .success([])
-        let exp = expectation(description: "Wait for load completion")
-
-        sut.load { recievedResult in
-            switch (recievedResult,expectedResult){
-            case let (.success(recievedItems),.success(expectedItems)):
-                XCTAssertEqual(recievedItems, expectedItems)
-            case let (.failure(recievedError as RemoteTransactionLoader.Error),.failure(expectedError as RemoteTransactionLoader.Error)):
-                XCTAssertEqual(recievedError, expectedError)
-            default:
-                XCTFail("Expected result \(expectedResult) got \(recievedResult) instead")
-            }
-                
-            }
-            exp.fulfill()
-
+        
+        expect(sut: sut, expectedResult: .success([])) {
+            client.complete(withStatusCode: 200, data: makeItemsJSON([]))
+        }
         
         
         
-        
-        client.complete(withStatusCode: 200, data: makeItemsJSON([]))
-        wait(for: [exp], timeout: 1.0)
     }
     
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
-
-    let item1 = makeTransaction(partnerDisplayName: "REWE Group", createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00"), amount: 124, currency: "PBP")
         
-    let item2 =
+        let item1 = makeTransaction(partnerDisplayName: "REWE Group", createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00"), amount: 124, currency: "PBP")
+        
+        let item2 =
         makeTransaction(partnerDisplayName: "dm-dogerie markt", createdAt: (Date(timeIntervalSince1970: 1598627222), "2020-08-28T15:07:02+00:00"), amount: 1240, currency: "PBP")
         let items = [item1.model,item2.model]
         
-        var expectedResult:RemoteTransactionLoader.Result = .success(items)
-        let exp = expectation(description: "Wait for load completion")
-
-        sut.load { recievedResult in
-            switch (recievedResult,expectedResult){
-            case let (.success(recievedItems),.success(expectedItems)):
-                XCTAssertEqual(recievedItems, expectedItems)
-            case let (.failure(recievedError as RemoteTransactionLoader.Error),.failure(expectedError as RemoteTransactionLoader.Error)):
-                XCTAssertEqual(recievedError, expectedError)
-            default:
-                XCTFail("Expected result \(expectedResult) got \(recievedResult) instead")
-            }
-                
-            }
-            exp.fulfill()
-
+        expect(sut: sut, expectedResult: .success(items)) {
+            client.complete(withStatusCode: 200, data: makeItemsJSON([item1.json,item2.json]))
+        }
         
         
-        
-        
-        client.complete(withStatusCode: 200, data: makeItemsJSON([item1.json,item2.json]))
-        wait(for: [exp], timeout: 1.0)
     }
     
     func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
@@ -198,16 +117,16 @@ final class RemoteTransactionLoaderTest: XCTestCase {
         
         var capturedResults = [TransactionLoader.Result]()
         sut?.load { capturedResults.append($0) }
-
+        
         sut = nil
         client.complete(withStatusCode: 200, data: makeItemsJSON([]))
         
         XCTAssertTrue(capturedResults.isEmpty)
     }
     
-    private func makeSUT(url:URL = anyURL()) -> (TransactionLoader,HTTPClientSpy) {
-       let client = HTTPClientSpy()
-       let sut = RemoteTransactionLoader(url: url, client: client)
+    private func makeSUT(url:URL = anyURL()) -> (RemoteTransactionLoader,HTTPClientSpy) {
+        let client = HTTPClientSpy()
+        let sut = RemoteTransactionLoader(url: url, client: client)
         return (sut,client)
     }
     
@@ -228,7 +147,7 @@ final class RemoteTransactionLoaderTest: XCTestCase {
                     "amount": amount,
                     "currency":currency
                 ],
-
+                
             ]
         ].compactMapValues { $0 }
         
@@ -239,6 +158,28 @@ final class RemoteTransactionLoaderTest: XCTestCase {
         return try! JSONSerialization.data(withJSONObject: json)
     }
     
+    func expect(sut:RemoteTransactionLoader,expectedResult:RemoteTransactionLoader.Result,action:() -> Void,file: StaticString = #file, line: UInt = #line) {
+        
+        var expectedResult:RemoteTransactionLoader.Result = expectedResult
+        let exp = expectation(description: "Wait for load completion")
+        
+        sut.load { recievedResult in
+            switch (recievedResult,expectedResult){
+            case let (.success(recievedItems),.success(expectedItems)):
+                XCTAssertEqual(recievedItems, expectedItems,file: file,line: line)
+            case let (.failure(recievedError as RemoteTransactionLoader.Error),.failure(expectedError as RemoteTransactionLoader.Error)):
+                XCTAssertEqual(recievedError, expectedError,file: file,line: line)
+            default:
+                XCTFail("Expected result \(expectedResult) got \(recievedResult) instead",file: file,line: line)
+            }
+            
+        }
+        exp.fulfill()
+        
+        action()
+        wait(for: [exp], timeout: 1.0)
+        
+    }
     class HTTPClientSpy:HTTPClient{
         
         var messages = [(url:URL,Completion:(HTTPClient.Result) -> Void)]()
@@ -255,9 +196,8 @@ final class RemoteTransactionLoaderTest: XCTestCase {
         
         func complete(withStatusCode code:Int, at index:Int = 0, data:Data){
             let response = HTTPURLResponse(url: requestedUrls[index], statusCode: code, httpVersion: nil, headerFields: nil)!
-//            let data = anyData()
             messages[index].Completion(.success((data,response)))
-                
+            
         }
     }
 }
