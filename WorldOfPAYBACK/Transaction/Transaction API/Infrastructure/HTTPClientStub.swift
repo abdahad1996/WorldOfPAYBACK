@@ -15,15 +15,13 @@ extension HTTPURLResponse {
                 self.init(url: anyURL(), statusCode: statusCode, httpVersion: nil, headerFields: nil)!
             }
         }
-class JSONHTTPClient: HTTPClient {
-    enum JsonError: Error {
-        case invalidPath
-        case invalidData
+
+public class HTTPClientStub: HTTPClient {
+    public init() {
+        
     }
     
-    func get(from url: URL, Completion: @escaping (HTTPClient.Result) -> Void) {
-        let json = loadJson(forFilename: "PBTransactions")
-        print(json)
+    public func get(from url: URL, Completion: @escaping (HTTPClient.Result) -> Void) {
         let filePath = Bundle.main.path(forResource: "PBTransactions", ofType: "json")!
         let fileUrl = URL(fileURLWithPath: filePath)
         let data = try! Data(contentsOf: fileUrl)
