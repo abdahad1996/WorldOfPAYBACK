@@ -97,7 +97,7 @@ final class RemoteTransactionLoaderTest: XCTestCase {
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
         
-        let item1 = makeTransaction(partnerDisplayName: "REWE Group", createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00"), amount: 124, currency: "PBP")
+        let item1 = makeTransaction(partnerDisplayName: "REWE Group",description: "Punkte sammeln", createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00"), amount: 124, currency: "PBP")
         
         let item2 =
         makeTransaction(partnerDisplayName: "dm-dogerie markt", createdAt: (Date(timeIntervalSince1970: 1598627222), "2020-08-28T15:07:02+00:00"), amount: 1240, currency: "PBP")
@@ -124,9 +124,12 @@ final class RemoteTransactionLoaderTest: XCTestCase {
         XCTAssertTrue(capturedResults.isEmpty)
     }
     
-    private func makeSUT(url:URL = anyURL()) -> (RemoteTransactionLoader,HTTPClientSpy) {
+    //MARK: HELPERS
+    private func makeSUT(url:URL = anyURL(),file: StaticString = #file, line: UInt = #line) -> (RemoteTransactionLoader,HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteTransactionLoader(url: url, client: client)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(client, file: file, line: line)
         return (sut,client)
     }
     
