@@ -55,7 +55,8 @@ final class WorldOfPAYBACKEndToEndTests: XCTestCase {
             bookingDate:  bookingDate(at: index),
             description: description(at: index),
             amount: amount(at: index),
-            currency: currency(at: index)
+            currency: currency(at: index),
+            category: cateogry(at: index)
         )
         
     }
@@ -133,6 +134,19 @@ final class WorldOfPAYBACKEndToEndTests: XCTestCase {
             "PBP",
             "PBP",
             "PBP",
+        ][index]
+    }
+    
+    private func cateogry(at index: Int) -> Int{
+        return [
+            1,
+            1,
+            2,
+            1,
+            1,
+            2,
+            1,
+            3,
         ][index]
     }
 }

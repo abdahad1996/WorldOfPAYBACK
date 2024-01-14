@@ -36,7 +36,7 @@ public class RemoteTransactionsMapper {
         var transactionItems: [TransactionItem] {
            
             items.map {
-                TransactionItem(partnerDisplayName: $0.partnerDisplayName, bookingDate: $0.transactionDetail.bookingDate, description:  $0.transactionDetail.description, amount: $0.transactionDetail.value.amount, currency: $0.transactionDetail.value.currency) }
+                TransactionItem(partnerDisplayName: $0.partnerDisplayName, bookingDate: $0.transactionDetail.bookingDate, description:  $0.transactionDetail.description, amount: $0.transactionDetail.value.amount, currency: $0.transactionDetail.value.currency, category: $0.category) }
         }
     }
     
