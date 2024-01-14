@@ -12,48 +12,48 @@ import WorldOfPAYBACK
 final class SortingRemoteTransactionLoaderTest: XCTestCase {
     
     func test_Init_DoesNotCallLoad(){
-        let (_,client) = makeSUT()
+        let (_,loader) = makeSUT()
         
         
-        XCTAssertTrue(client.messages.isEmpty)
+        XCTAssertTrue(loader.messages.isEmpty)
     }
     
     
     func test_load_LoadsFromLoader(){
-        let (sut,client) = makeSUT()
+        let (sut,loader) = makeSUT()
         
         
-        sut.load{ _ in }
+        loader.load{ _ in }
         
         
-        XCTAssertEqual(client.messages.count,1)
+        XCTAssertEqual(loader.messages.count,1)
     }
     
     func test_loadTwice_LoadsFromClientTwice(){
-        let (sut,client) = makeSUT()
+        let (sut,loader) = makeSUT()
         
         
         sut.load{ _ in }
         sut.load{ _ in }
         
-        XCTAssertEqual(client.messages.count,2)
+        XCTAssertEqual(loader.messages.count,2)
     }
     
     
     func test_load_DeliversErrorOnClientError(){
-        let (sut,client) = makeSUT()
+        let (sut,loader) = makeSUT()
         
         expect(sut: sut, expectedResult: .failure(RemoteTransactionLoader.Error.connectivity)) {
-            client.complete(with: .connectivity)
+            loader.complete(with: .connectivity)
         }
         
     }
     
     func test_load_DeliversErrorOnClientInvalidDataError(){
-        let (sut,client) = makeSUT()
+        let (sut,loader) = makeSUT()
         
         expect(sut: sut, expectedResult: .failure(RemoteTransactionLoader.Error.invalidData)) {
-            client.complete(with: .invalidData)
+            loader.complete(with: .invalidData)
         }
         
     }
@@ -61,10 +61,10 @@ final class SortingRemoteTransactionLoaderTest: XCTestCase {
 
 
     func test_load_deliversNoItemsWhenClientCompletesWithEmptyTransactions() {
-        let (sut, client) = makeSUT()
+        let (sut, loader) = makeSUT()
         
         expect(sut: sut, expectedResult: .success([])) {
-            client.complete(items: [])
+            loader.complete(items: [])
         }
         
         
@@ -72,7 +72,7 @@ final class SortingRemoteTransactionLoaderTest: XCTestCase {
     }
     
     func test_load_deliversSortedTransactionsWhenClientCompletesWithTransactions() {
-        let (sut, client) = makeSUT()
+        let (sut, loader) = makeSUT()
         let item1 = makeTransactionItem(partnerDisplayName: "REWE Group",description: "Punkte sammeln", createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00"), amount: 124, currency: "PBP")
         
         let item2 =
@@ -96,7 +96,7 @@ final class SortingRemoteTransactionLoaderTest: XCTestCase {
         }
         
         let withOutSorteditems = [item1,item2,item3]
-        client.complete(items: withOutSorteditems)
+        loader.complete(items: withOutSorteditems)
         
         
         let aftersortedItems = [item3,item2,item1]
