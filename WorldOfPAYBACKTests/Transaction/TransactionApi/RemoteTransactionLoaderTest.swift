@@ -133,33 +133,6 @@ final class RemoteTransactionLoaderTest: XCTestCase {
         return (sut,client)
     }
     
-    private func makeTransaction(partnerDisplayName: String, description: String? = nil,createdAt: (date: Date, iso8601String: String), amount: Int,currency:String, reference:String = "",category:Int = 1) -> (model: TransactionItem, json: [String: Any]) {
-        
-        let item = TransactionItem(partnerDisplayName: partnerDisplayName, bookingDate: createdAt.date, description: description, amount: amount, currency: currency)
-        
-        let json = [
-            "partnerDisplayName": partnerDisplayName,
-            "alias": [
-                "reference": reference
-            ],
-            "category": category,
-            "transactionDetail": [
-                "description": description,
-                "bookingDate" : createdAt.iso8601String,
-                "value": [
-                    "amount": amount,
-                    "currency":currency
-                ],
-                
-            ]
-        ].compactMapValues { $0 }
-        
-        return (item, json)
-    }
-    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
-        let json = ["items": items]
-        return try! JSONSerialization.data(withJSONObject: json)
-    }
     
     func expect(sut:RemoteTransactionLoader,expectedResult:RemoteTransactionLoader.Result,action:() -> Void,file: StaticString = #file, line: UInt = #line) {
         
