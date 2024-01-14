@@ -12,9 +12,9 @@ public func anyURL() -> URL {
 }
 extension HTTPURLResponse {
     convenience init(statusCode: Int) {
-                self.init(url: anyURL(), statusCode: statusCode, httpVersion: nil, headerFields: nil)!
-            }
-        }
+        self.init(url: anyURL(), statusCode: statusCode, httpVersion: nil, headerFields: nil)!
+    }
+}
 
 public class HTTPClientStub: HTTPClient {
     public init() {
@@ -29,20 +29,20 @@ public class HTTPClientStub: HTTPClient {
         DispatchQueue.global().asyncAfter(deadline: .now() + 2, execute: {
             Completion(.success((data, HTTPURLResponse(statusCode: 200))))
         })
-        }
     }
-                       
-                       
-                       
-                       
-                       
-func loadJson(forFilename fileName: String) -> NSDictionary? {
+}
 
+
+
+
+
+func loadJson(forFilename fileName: String) -> NSDictionary? {
+    
     if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
         if let data = NSData(contentsOf: url) {
             do {
                 let dictionary = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments) as? NSDictionary
-
+                
                 return dictionary
             } catch {
                 print("Error!! Unable to parse  \(fileName).json")
@@ -50,6 +50,6 @@ func loadJson(forFilename fileName: String) -> NSDictionary? {
         }
         print("Error!! Unable to load  \(fileName).json")
     }
-
+    
     return nil
 }
