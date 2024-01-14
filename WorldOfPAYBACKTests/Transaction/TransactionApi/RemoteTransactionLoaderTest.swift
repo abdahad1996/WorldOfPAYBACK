@@ -136,7 +136,7 @@ final class RemoteTransactionLoaderTest: XCTestCase {
     
     func expect(sut:RemoteTransactionLoader,expectedResult:RemoteTransactionLoader.Result,action:() -> Void,file: StaticString = #file, line: UInt = #line) {
         
-        var expectedResult:RemoteTransactionLoader.Result = expectedResult
+        let expectedResult:RemoteTransactionLoader.Result = expectedResult
         let exp = expectation(description: "Wait for load completion")
         
         sut.load { recievedResult in

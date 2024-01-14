@@ -35,7 +35,7 @@ func makeTransactionItem(partnerDisplayName: String, description: String? = nil,
         ],
         "category": category,
         "transactionDetail": [
-            "description": description!,
+            "description": description as Any,
             "bookingDate" : createdAt.iso8601String,
             "value": [
                 "amount": amount,
