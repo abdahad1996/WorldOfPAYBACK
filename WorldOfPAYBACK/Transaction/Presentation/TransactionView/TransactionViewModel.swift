@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 public final class TransactionViewModel: ObservableObject {
 
@@ -14,6 +15,7 @@ public final class TransactionViewModel: ObservableObject {
     }
     
     @Published public var filteredCategory = -1
+    @Published public var totalAmount = 0
 
     public enum State: Equatable {
         case idle
@@ -21,6 +23,7 @@ public final class TransactionViewModel: ObservableObject {
         case failure(GetTransactionError)
         case success([TransactionItem])
     }
+    private var totalCancellables: Set<AnyCancellable> = []
 
     private let transactionLoader: TransactionLoader
 
@@ -36,25 +39,32 @@ public final class TransactionViewModel: ObservableObject {
         return transactionItems.filter { $0.category == filteredCategory }
     }
     
-    public var categories: [Int] {
+    public var categories = [Int]()
+    public var UniqueCategories:[Int]{
         guard case let .success(transactionItems) = getTransactionsState else { return [] }
+        categories = [-1]
+        let localCategory = transactionItems.map{$0.category}
+        let uniqueCategory =  Array(Set(localCategory))
+        var sortedCategory = uniqueCategory.sorted { $0 < $1 }
+        sortedCategory.insert(-1, at: 0)
 
-        
-        return transactionItems.map { $0.category}
+         return  sortedCategory
     }
     
-    public var totalAmount: Int {
-        return filteredTransactions.reduce(0) { $0 + $1.amount }
-        
-    }
 
     public init(transactionLoader: TransactionLoader) {
         self.transactionLoader = transactionLoader
+
+        $filteredCategory.sink { _ in
+            self.totalAmount = self.filteredTransactions.reduce(0) { $0 + $1.amount }
+            print("total value is \(self.totalAmount)")
+        }.store(in: &totalCancellables)
     }
 
 
      public func getAllTransactions()  {
          getTransactionsState = .isLoading
+         filteredCategory = -1
          transactionLoader.load {[weak self] result in
              guard let self = self else{
                  self?.getTransactionsState = .idle
@@ -62,6 +72,7 @@ public final class TransactionViewModel: ObservableObject {
              switch result {
              case .success(let transactions):
                  self.getTransactionsState = .success(transactions)
+                 totalAmount = transactions.reduce(0) { $0 + $1.amount }
              case .failure(_):
                  self.getTransactionsState = .failure(.ConnectionError)
              }
