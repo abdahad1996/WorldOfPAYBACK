@@ -171,6 +171,7 @@
 		541D633F2B554DC10089CC07 /* test_homeViewLoadingState.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_homeViewLoadingState.light.png; sourceTree = "<group>"; };
 		541D63402B554DC10089CC07 /* test_homeViewIdleState.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_homeViewIdleState.dark.png; sourceTree = "<group>"; };
 		541D634A2B554E4A0089CC07 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		541D634B2B559D140089CC07 /* CI_iOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI_iOS.xctestplan; sourceTree = "<group>"; };
 		54AA47342B50997200CF6AD1 /* WorldOfPAYBACK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldOfPAYBACK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54AA47372B50997200CF6AD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54AA47392B50997200CF6AD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -531,6 +532,7 @@
 		54AA472B2B50997200CF6AD1 = {
 			isa = PBXGroup;
 			children = (
+				541D634B2B559D140089CC07 /* CI_iOS.xctestplan */,
 				54AA47362B50997200CF6AD1 /* WorldOfPAYBACK */,
 				541D62432B509E830089CC07 /* WorldOfPAYBACKTests */,
 				541D626A2B5211DB0089CC07 /* WorldOfPAYBACKEndToEndTests */,

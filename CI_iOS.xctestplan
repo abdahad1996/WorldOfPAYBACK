@@ -12,7 +12,34 @@
 
   },
   "testTargets" : [
-
+    {
+      "target" : {
+        "containerPath" : "container:WorldOfPAYBACK.xcodeproj",
+        "identifier" : "541D627D2B52B04D0089CC07",
+        "name" : "WorldOfPAYBACKAppTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorldOfPAYBACK.xcodeproj",
+        "identifier" : "541D62682B5211DB0089CC07",
+        "name" : "WorldOfPAYBACKEndToEndTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorldOfPAYBACK.xcodeproj",
+        "identifier" : "541D62412B509E830089CC07",
+        "name" : "WorldOfPAYBACKTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorldOfPAYBACK.xcodeproj",
+        "identifier" : "541D62CE2B54D01B0089CC07",
+        "name" : "WorldOfPAYBACKUITests"
+      }
+    }
   ],
   "version" : 1
 }
