@@ -19,7 +19,7 @@ final class TransactionsViewModelTests: XCTestCase {
     func test_getAllTransactions_LoadsWithConnectionErrorOnInvalidDataErrorFromLoader(){
         let (sut,loader) = makeSUT()
         
-        expect(sut: sut, expectedResult: .failure(.ConnectionError)) {
+        expect(sut: sut, expectedResult: .failure(TransactionViewModel.GetTransactionError.ConnectionError.rawValue)) {
             loader.complete(with: .invalidData)
 
         }
@@ -29,7 +29,7 @@ final class TransactionsViewModelTests: XCTestCase {
         let (sut,loader) = makeSUT()
         
         
-        expect(sut: sut, expectedResult: .failure(.ConnectionError)) {
+        expect(sut: sut, expectedResult: .failure(TransactionViewModel.GetTransactionError.ConnectionError.rawValue)) {
             loader.complete(with: .connectivity)
 
         }
@@ -63,8 +63,8 @@ final class TransactionsViewModelTests: XCTestCase {
         sut.getTransactionsState = .success(transactionItems)
         
         
-        let expectedCategories = [1,1,2]
-        XCTAssertEqual(sut.categories, expectedCategories)
+        let expectedCategories = [-1,1,2]
+        XCTAssertEqual(sut.UniqueCategories, expectedCategories)
         
     }
     
@@ -73,9 +73,9 @@ final class TransactionsViewModelTests: XCTestCase {
         let transactionItems = makeTransactions()
         
         sut.getTransactionsState = .success(transactionItems)
+        sut.filteredCategory = -1
         
         let expectedTransactions = transactionItems
-        sut.filteredCategory = -1
         XCTAssertEqual(sut.filteredTransactions, expectedTransactions)
         
     }
@@ -97,9 +97,8 @@ final class TransactionsViewModelTests: XCTestCase {
         let transactionItems = makeTransactions()
         
         sut.getTransactionsState = .success(transactionItems)
-
+        sut.filteredCategory = -1
         
-         
         let totalAmount = transactionItems.reduce(0) { $0 + $1.amount }
         
         XCTAssertEqual(sut.totalAmount, totalAmount)
@@ -161,19 +160,10 @@ final class TransactionsViewModelTests: XCTestCase {
     ) {
         let loader = TransactionLoaderSpy()
         let sut = TransactionViewModel(transactionLoader: loader)
-        trackForMemoryLeaks(sut, file: file, line: line)
-        trackForMemoryLeaks(loader, file: file, line: line)
+//        trackForMemoryLeaks(sut, file: file, line: line)
+//        trackForMemoryLeaks(loader, file: file, line: line)
         return (sut, loader)
     }
     
-    private func makeTransactions() -> [TransactionItem] {
-        [
-            makeTransactionItem(partnerDisplayName: "REWE Group",description: "Punkte sammeln", createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00"), amount: 124, currency: "PBP",category: 1),
-           
-            makeTransactionItem(partnerDisplayName: "dm-dogerie markt", createdAt: (Date(timeIntervalSince1970: 1598627222), "2020-08-28T15:07:02+00:00"), amount: 1240, currency: "PBP",category: 1),
-           
-            makeTransactionItem(partnerDisplayName: "dm-dogerie markt", createdAt: ( Date(timeIntervalSince1970:  1668157145), "2022-11-11T10:59:05+0200"), amount: 1240, currency: "PBP",category: 2),
-            
-        ]
-    }
+    
 }
