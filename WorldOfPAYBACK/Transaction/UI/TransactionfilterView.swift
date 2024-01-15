@@ -8,8 +8,14 @@
 import SwiftUI
 
 public struct TransactionfilterView: View {
+    
     @Binding var selectedFilter: Int
     var categories:[Int]
+    
+    public init(selectedFilter: Binding<Int>, categories: [Int]) {
+        self._selectedFilter = selectedFilter
+        self.categories = categories
+    }
     
     public var body: some View {
         Picker("Filter", selection: $selectedFilter) {

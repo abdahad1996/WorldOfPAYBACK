@@ -60,7 +60,8 @@ public struct TransactionCell: View {
                 }
                
                 .padding()
-        }.background(
+            }
+            .background(
             LinearGradient(
                 gradient: Gradient(colors: [Color.red, Color.blue]),
                 startPoint: .topLeading,

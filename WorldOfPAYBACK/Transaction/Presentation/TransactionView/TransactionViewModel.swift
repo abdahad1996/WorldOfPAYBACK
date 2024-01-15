@@ -15,12 +15,15 @@ public final class TransactionViewModel: ObservableObject {
     }
     
     @Published public var filteredCategory = -1
+    @Published public var filteredTransactions = [TransactionItem]()
     @Published public var totalAmount = 0
+   
+
 
     public enum State: Equatable {
         case idle
         case isLoading
-        case failure(GetTransactionError)
+        case failure(String)
         case success([TransactionItem])
     }
     private var totalCancellables: Set<AnyCancellable> = []
@@ -29,15 +32,6 @@ public final class TransactionViewModel: ObservableObject {
 
     @Published public var getTransactionsState: State = .idle
     
-    public var filteredTransactions: [TransactionItem] {
-        guard case let .success(transactionItems) = getTransactionsState else { return [] }
-
-        if filteredCategory == -1 {
-            return transactionItems
-        }
-
-        return transactionItems.filter { $0.category == filteredCategory }
-    }
     
     public var categories = [Int]()
     public var UniqueCategories:[Int]{
@@ -55,10 +49,25 @@ public final class TransactionViewModel: ObservableObject {
     public init(transactionLoader: TransactionLoader) {
         self.transactionLoader = transactionLoader
 
-        $filteredCategory.sink { _ in
-            self.totalAmount = self.filteredTransactions.reduce(0) { $0 + $1.amount }
-            print("total value is \(self.totalAmount)")
+        $filteredCategory.sink {[weak self] value in
+            guard case let .success(transactionItems) = self?.getTransactionsState else {
+                self?.filteredTransactions = []
+                return
+            }
+            
+            if value == -1 {
+                self?.filteredTransactions = transactionItems
+                return
+            }
+            self?.filteredTransactions = transactionItems.filter { $0.category == value }
+
         }.store(in: &totalCancellables)
+        
+        self.$filteredTransactions
+            .map { $0.map(\.amount).reduce(0, +) }
+            .eraseToAnyPublisher()
+            .assign(to: &$totalAmount)
+
     }
 
 
@@ -72,9 +81,10 @@ public final class TransactionViewModel: ObservableObject {
              switch result {
              case .success(let transactions):
                  self.getTransactionsState = .success(transactions)
-                 totalAmount = transactions.reduce(0) { $0 + $1.amount }
+                 self.filteredTransactions = transactions
              case .failure(_):
-                 self.getTransactionsState = .failure(.ConnectionError)
+                 self.getTransactionsState = .failure(GetTransactionError.ConnectionError.rawValue)
+                 
              }
          }
 

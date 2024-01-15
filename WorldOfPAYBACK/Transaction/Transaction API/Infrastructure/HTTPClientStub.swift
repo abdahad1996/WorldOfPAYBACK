@@ -26,8 +26,13 @@ public class HTTPClientStub: HTTPClient {
         let fileUrl = URL(fileURLWithPath: filePath)
         let data = try! Data(contentsOf: fileUrl)
         
+        
         DispatchQueue.global().asyncAfter(deadline: .now() + 2, execute: {
-            Completion(.success((data, HTTPURLResponse(statusCode: 200))))
+//            Completion(.success((data, HTTPURLResponse(statusCode: 200))))
+            
+            //for failure
+            let error = NSError(domain: "", code: 1)
+            Completion(.failure(error))
         })
     }
 }

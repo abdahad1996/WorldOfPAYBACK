@@ -9,10 +9,15 @@ import Foundation
 
 import SwiftUI
 
-struct FloatingView: View {
+public struct FloatingView: View {
+    
     @Binding var count: Int
 
-    var body: some View {
+    public init(count: Binding<Int>) {
+        self._count = count
+    }
+    
+    public var body: some View {
         VStack {
             Text("Total Amount: \(count)")
                 .padding()

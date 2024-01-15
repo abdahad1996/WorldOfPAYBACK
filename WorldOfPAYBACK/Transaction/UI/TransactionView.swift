@@ -39,10 +39,22 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
                 ProgressView()
                 Spacer()
 
-            case let .failure(error):
-                Text(error.rawValue)
-                    .foregroundColor(.red)
-                Spacer()
+            case .failure(let error):
+//                Text(error.rawValue)
+//                    .foregroundColor(.red)
+//                Spacer()
+                VStack {
+                    Text(error)
+                    Button(action: {
+                        viewModel.getAllTransactions()
+                    }) {
+                        Text("Retry")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.primary)
+                            .cornerRadius(10)
+                    }
+                }
 
             case .success:
                 ScrollView(.vertical, showsIndicators: false) {
@@ -50,7 +62,7 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
                         .padding(.bottom)
 
                     LazyVStack {
-                        ForEach(viewModel.filteredTransactions) { transaction in
+                        ForEach(Array(viewModel.filteredTransactions.enumerated()),id: \.element) { index, transaction in
                             transactionCell(transaction)
                                 .background(Color(uiColor: .systemBackground))
                                 .cornerRadius(16)
@@ -61,9 +73,10 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
                                 .shadow(color: .gray, radius: 2)
                                 .onTapGesture {
                                     showTransactionDetails(transaction)
-                                }
+                                }.accessibilityIdentifier("UICellVertical\(index)")
                         }
-                    }
+                        
+                    }.accessibilityIdentifier("list")
                 }.overlay(FloatingView(count: $viewModel.totalAmount), alignment: .bottom)
             }
         }
@@ -72,6 +85,8 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
             guard viewModel.getTransactionsState == .idle else { return }
 
              viewModel.getAllTransactions()
+        }.refreshable {
+            viewModel.getAllTransactions()
         }
     }
 }

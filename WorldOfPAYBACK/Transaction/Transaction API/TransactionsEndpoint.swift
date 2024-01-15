@@ -9,12 +9,12 @@ import Foundation
 
 
 public enum TransactionsEndpoint {
-    case get(UUID)
+    case get
     
     public func url(baseURL: URL) -> URL {
         switch self {
-        case let .get(id):
-            return baseURL.appendingPathComponent("t")
+        case .get:
+            return baseURL.appendingPathComponent("transactions")
         }
     }
 }
