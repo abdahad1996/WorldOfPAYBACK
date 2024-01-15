@@ -24,7 +24,6 @@ final class TransactionFlow {
     
     func start() {
         let vc = factory.makeTransactionListViewController(selection: showTransactionDetail)
-        navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([vc], animated: false)
     }
     

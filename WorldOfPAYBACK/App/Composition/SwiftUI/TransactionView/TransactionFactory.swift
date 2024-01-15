@@ -30,7 +30,7 @@ public final class TransactionFactory {
             TransactionfilterView(selectedFilter: selectedFilter, categories: categories)
         } totalCountView: { total in
             FloatingView(count: total)
-        }.navigationTitle(TransactionViewModel.title)
+        }.navigationTitle(TransactionViewModel.title).navigationBarTitleDisplayMode(.inline)
 
         let controller = UIHostingController(rootView: view)
         return controller

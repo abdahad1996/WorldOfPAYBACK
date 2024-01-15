@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     #else
     private lazy var baseURL = URL(string: "https://api.payback.com/transactions")!
     #endif
+    
      func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
        
         guard let scene = (scene as? UIWindowScene) else { return }
