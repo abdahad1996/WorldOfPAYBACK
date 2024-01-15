@@ -28,10 +28,21 @@ public class HTTPClientStub: HTTPClient {
         
         
        let randomBool =  Bool.random()
+        
+        if CommandLine.arguments.contains("success") {
+            Completion(.success((data, HTTPURLResponse(statusCode: 200))))
+            return
+        }
+        if CommandLine.arguments.contains("failure"){
+            let error = NSError(domain: "", code: 1)
+            Completion(.failure(error))
+            return
+        }
         DispatchQueue.global().asyncAfter(deadline: .now() + 2, execute: {
             if randomBool {
-                Completion(.success((data, HTTPURLResponse(statusCode: 200))))
-            }
+                    Completion(.success((data, HTTPURLResponse(statusCode: 200))))
+                }
+            
             else{
                 let error = NSError(domain: "", code: 1)
                 Completion(.failure(error))
