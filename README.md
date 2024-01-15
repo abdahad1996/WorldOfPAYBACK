@@ -1,16 +1,25 @@
 
+
+
 ## "WorldOfPAYBACK" App - Requirements
 
 Please create a SwiftUI App based on the following User-Stories:
 
-✅* As a user of the App, I want to see a list of (mocked) transactions. Each item in the list displays `bookingDate`, `partnerDisplayName`, `transactionDetail.description`, `value.amount` and `value.currency`. *(see attached JSON File)*
-✅* As a user of the App, I want to have the list of transactions sorted by `bookingDate` from newest (top) to oldest (bottom).
-✅* As a user of the App, I want to get feedback when loading of the transactions is ongoing or an Error occurs. *(Just delay the mocked server response for 1-2 seconds and randomly fail it)*
-✅* As a user of the App, I want to see an error if the device is offline.
-✅* As a user of the App, I want to filter the list of transactions by `category`.
-✅* As a user of the App, I want to see the sum of filtered transactions somewhere on the Transaction-list view. *(Sum of `value.amount`)*
-✅* As a user of the App, I want to select a transaction and navigate to its details. The details-view should just display `partnerDisplayName` and `transactionDetail.description`.
-✅* As a user of the App, I like to see nice UI in general. However, for this coding challenge fancy UI is not required.
+✅ As a user of the App, I want to see a list of (mocked) transactions. Each item in the list displays `bookingDate`, `partnerDisplayName`, `transactionDetail.description`, `value.amount` and `value.currency`. *(see attached JSON File)*
+
+✅ As a user of the App, I want to have the list of transactions sorted by `bookingDate` from newest (top) to oldest (bottom).
+
+✅ As a user of the App, I want to get feedback when loading of the transactions is ongoing or an Error occurs. *(Just delay the mocked server response for 1-2 seconds and randomly fail it)*
+
+✅ As a user of the App, I want to see an error if the device is offline.
+
+✅ As a user of the App, I want to filter the list of transactions by `category`.
+
+✅ As a user of the App, I want to see the sum of filtered transactions somewhere on the Transaction-list view. *(Sum of `value.amount`)*
+
+✅ As a user of the App, I want to select a transaction and navigate to its details. The details-view should just display `partnerDisplayName` and `transactionDetail.description`.
+
+✅ As a user of the App, I like to see nice UI in general. However, for this coding challenge fancy UI is not required.
 
 ## "WorldOfPAYBACK" App - General Information
 
@@ -26,18 +35,10 @@ Please create a SwiftUI App based on the following User-Stories:
 	3. "Settings"-Feature: Gives the possibility to adjust general Settings.
 
 
-## PAYBACK Environment
-
-* We are currently in a transition phase of moving from UIKit to SwiftUI.
-* We use Reactive programming and are currently moving from a self built Reactive-Library to Combine. For asynchronous code we are moving to Swift Concurrency.
-* We try to keep to as few external dependencies as possible. However, we use Swift Package Manager when we need to add a dependency.
-* We are using Jenkins to build, test and deploy our Apps.
-
-
-# this code was build thinking in terms of the PAYBACK environment:
+## PAYBACK Environment(this code was build thinking in terms of the PAYBACK environment)
  # transition phase of moving from UIKit to SwiftUI.
-- i didn't start with swiftui but rather with scene delegate so i could try to mimic coding enviroment cause i know a lot of the code would be in uikit and the transition to swiftUI would involve a lot of hosting view controlllers
-- navigation is a known issue in swiftui and decoupling it from the views is not ideal maybe with navigation stack it is but with the constrain of ios 16  i prefer to use at the moment flows or coordinator with hosting view controllers to decouple the view from navigation .
+- i didn't start with swiftui but rather with scene delegate so i could try to mimic coding enviroment cause i know a lot of the code would be in uikit and the transition to swiftUI would involve a lot of hosting view controlllers.
+- navigation is a known issue in swiftui and decoupling it from the views is not ideal maybe with navigation stack it is but with the constrain of ios 16 so i prefer to use at the moment flows or coordinator with hosting view controllers to decouple the view from navigation .
 - i tried to compose swiftui views using multiple child views so we can easily reuse a view anywhere in the codebase if needed
 - i stuck to @state and @stateobjects and not the new @observable macro again due to ios version constraints
 
