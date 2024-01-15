@@ -19,7 +19,7 @@ final class TransactionsViewModelTests: XCTestCase {
     func test_getAllTransactions_LoadsWithConnectionErrorOnInvalidDataErrorFromLoader(){
         let (sut,loader) = makeSUT()
         
-        expect(sut: sut, expectedResult: .failure(TransactionViewModel.GetTransactionError.ConnectionError.rawValue)) {
+        expect(sut: sut, expectedResult: .failure(localized("GENERIC_CONNECTION_ERROR"))) {
             loader.complete(with: .invalidData)
 
         }
@@ -29,7 +29,7 @@ final class TransactionsViewModelTests: XCTestCase {
         let (sut,loader) = makeSUT()
         
         
-        expect(sut: sut, expectedResult: .failure(TransactionViewModel.GetTransactionError.ConnectionError.rawValue)) {
+        expect(sut: sut, expectedResult: .failure(localized("GENERIC_CONNECTION_ERROR"))) {
             loader.complete(with: .connectivity)
 
         }

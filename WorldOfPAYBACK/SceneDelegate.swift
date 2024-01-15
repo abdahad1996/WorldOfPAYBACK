@@ -28,7 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     
     private func showTransactionFlow(_ scene: UIWindowScene) {
-        let apiClient = HTTPClientStub()
         let navigationController = UINavigationController()
         let remoteLoader = RemoteTransactionLoader(url:baseURL,client: httpClient)
         let factory = TransactionFactory(loader:remoteLoader)

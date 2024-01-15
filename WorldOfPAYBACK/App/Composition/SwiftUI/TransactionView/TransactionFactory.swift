@@ -22,7 +22,7 @@ public final class TransactionFactory {
         let sortedLoader = SortingRemoteTransactionLoaderDecorator(loader: mainQueueLoader, sortingPolicy: SortingPolicy())
         let viewModel = TransactionViewModel(transactionLoader: sortedLoader)
 
-        let view =  TransactionsView(viewModel: viewModel, showTransactionDetails: { [weak self] transactionItem in
+        let view =  TransactionsView(viewModel: viewModel, showTransactionDetails: {  transactionItem in
            selection(transactionItem)
         }) { transactionItem in
             TransactionCell(viewModel: TransactionCellViewModel(transaction: transactionItem))
@@ -33,7 +33,7 @@ public final class TransactionFactory {
         }
 
         let controller = UIHostingController(rootView: view)
-        controller.title = "Transactions"
+        controller.title = TransactionViewModel.title
         return controller
     }
 }

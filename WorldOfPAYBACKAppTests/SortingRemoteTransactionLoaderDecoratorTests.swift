@@ -20,7 +20,7 @@ final class SortingRemoteTransactionLoaderTest: XCTestCase {
     
     
     func test_load_LoadsFromLoader(){
-        let (sut,loader) = makeSUT()
+        let (_,loader) = makeSUT()
         
         
         loader.load{ _ in }

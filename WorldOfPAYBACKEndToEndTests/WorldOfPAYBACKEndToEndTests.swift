@@ -9,7 +9,6 @@ import XCTest
 import WorldOfPAYBACK
 
 final class WorldOfPAYBACKEndToEndTests: XCTestCase {
-
     
     func test_endToEndTestServerGETTransactionResult_matchesFixedTestAccountData() {
         switch getTransactionResult() {

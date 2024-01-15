@@ -28,11 +28,11 @@ public class HTTPClientStub: HTTPClient {
         
         
         DispatchQueue.global().asyncAfter(deadline: .now() + 2, execute: {
-//            Completion(.success((data, HTTPURLResponse(statusCode: 200))))
+            Completion(.success((data, HTTPURLResponse(statusCode: 200))))
             
             //for failure
-            let error = NSError(domain: "", code: 1)
-            Completion(.failure(error))
+//            let error = NSError(domain: "", code: 1)
+//            Completion(.failure(error))
         })
     }
 }

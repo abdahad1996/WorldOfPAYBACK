@@ -23,7 +23,7 @@ public class TransactionCellViewModel{
     }
     
     public var bookingDate: String {
-        format(date: transaction.bookingDate)
+        DateFormatterHelper.format(date: transaction.bookingDate)
     }
     
     public var amount:String{
@@ -36,13 +36,13 @@ public class TransactionCellViewModel{
      
 }
 
-extension TransactionCellViewModel {
-    
-     func format(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy 'at' h:mm a"
-        return dateFormatter.string(from: date)
-    }
-    
-}
+//extension TransactionCellViewModel {
+//    
+//     func format(date: Date) -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MMM d, yyyy 'at' h:mm a"
+//        return dateFormatter.string(from: date)
+//    }
+//    
+//}
 

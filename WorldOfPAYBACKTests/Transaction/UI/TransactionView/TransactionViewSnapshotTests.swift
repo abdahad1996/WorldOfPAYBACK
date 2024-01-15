@@ -27,7 +27,7 @@ final class HomeViewSnapshotTests: XCTestCase {
     }
     
     func test_homeViewFailureState() {
-        let (sut,_) = makeSUT(state: .failure(TransactionViewModel.GetTransactionError.ConnectionError.rawValue))
+        let (sut,_) = makeSUT(state: .failure(localized("GENERIC_CONNECTION_ERROR")))
         
         assertLightSnapshot(matching: sut, as: .image(on: .iPhone13))
         assertDarkSnapshot(matching: sut, as: .image(on: .iPhone13))
@@ -54,6 +54,7 @@ final class HomeViewSnapshotTests: XCTestCase {
         }
         return (view,viewModel)
     }
+    
     
     private static func makeTransactions() -> [TransactionItem] {
        [

@@ -10,9 +10,7 @@ import Combine
 
 public final class TransactionViewModel: ObservableObject {
 
-    public enum GetTransactionError: String, Swift.Error {
-        case ConnectionError = "An error occured while fetching Transactions. Please try again later!"
-    }
+    
     
     @Published public var filteredCategory = -1
     @Published public var filteredTransactions = [TransactionItem]()
@@ -83,10 +81,27 @@ public final class TransactionViewModel: ObservableObject {
                  self.getTransactionsState = .success(transactions)
                  self.filteredTransactions = transactions
              case .failure(_):
-                 self.getTransactionsState = .failure(GetTransactionError.ConnectionError.rawValue)
+                 self.getTransactionsState = .failure(TransactionViewModel.loadError)
                  
              }
          }
 
     }
+}
+
+extension TransactionViewModel {
+        public static var title: String {
+            NSLocalizedString("TRANSACTION_VIEW_TITLE",
+                tableName: "Transaction",
+                bundle: Bundle(for: TransactionViewModel.self),
+                comment: "Title for the Transaction view")
+        }
+    
+    public static var loadError: String {
+        NSLocalizedString("GENERIC_CONNECTION_ERROR",
+                          tableName: "Transaction",
+                          bundle: Bundle(for: TransactionViewModel.self),
+                          comment: "Error message displayed when we can't load the resource from the server")
+    }
+    
 }
