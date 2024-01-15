@@ -27,12 +27,16 @@ public class HTTPClientStub: HTTPClient {
         let data = try! Data(contentsOf: fileUrl)
         
         
+       let randomBool =  Bool.random()
         DispatchQueue.global().asyncAfter(deadline: .now() + 2, execute: {
-            Completion(.success((data, HTTPURLResponse(statusCode: 200))))
-            
-            //for failure
-//            let error = NSError(domain: "", code: 1)
-//            Completion(.failure(error))
+            if randomBool {
+                Completion(.success((data, HTTPURLResponse(statusCode: 200))))
+            }
+            else{
+                let error = NSError(domain: "", code: 1)
+                Completion(.failure(error))
+            }
+           
         })
     }
 }

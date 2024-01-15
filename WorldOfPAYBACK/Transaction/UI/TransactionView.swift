@@ -79,14 +79,14 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
                     }.accessibilityIdentifier("list")
                 }.overlay(FloatingView(count: $viewModel.totalAmount), alignment: .bottom)
             }
-        }
+        }.refreshable {
+            viewModel.getAllTransactions()
+        } 
         .padding(.horizontal)
         .task {
             guard viewModel.getTransactionsState == .idle else { return }
 
              viewModel.getAllTransactions()
-        }.refreshable {
-            viewModel.getAllTransactions()
         }
     }
 }
