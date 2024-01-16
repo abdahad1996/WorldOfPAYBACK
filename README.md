@@ -1,123 +1,66 @@
-[![CI-iOS](https://github.com/Marian25/Foodybite/actions/workflows/ios.yml/badge.svg)](https://github.com/Marian25/Foodybite/actions/workflows/ios.yml)
+[![CI-iOS](https://github.com/abdahad1996/WorldOfPAYBACK/actions/workflows/ios.yml/badge.svg)](https://github.com/abdahad1996/WorldOfPAYBACK/actions/workflows/ios.yml) ( The tests work locally just need to fix them on CI :P )
 
-# Foodybite
+<img width="484" alt="Screenshot 2024-01-16 at 08 26 51" src="https://github.com/abdahad1996/WorldOfPAYBACK/assets/28492677/8ab18738-881a-45af-b1d7-31d8833cf147">
 
-💡 My vision for this project is centered around a simple yet powerful way to create a user-friendly app that helps you find the best restaurant near you based on location, radius, and number of stars. Additionally, users can see details, like opening hours, address, reviews, or photos for each restaurant found and give a review. The app allows users to search directly for a restaurant and enables them to give a review right away.
+# WorldOfPAYBACK
 
-1. [Motivation](#motivation)
-2. [Installation Guide](#installation-guide)
-3. [Demo Videos](./Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
-4. [Requirements](#tools)
+💡 My Motivation for this was based on simulating the payback environment which was mentioned in the docs and i made sure i had those points in my mind 
+
+1. [Installation Guide](#installation-guide)
+2. [Demo Videos](./Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
+3. [Requirements](#Requirements)
+4. [Tools](#tools)
 5. [Frameworks](#frameworks)
 6. [Concepts](#concepts)
 7. [Architecture](./Readme_Sections/Architecture/Architecture.md#architecture)
     1. [Overview](./Readme_Sections/Architecture/Architecture.md#overview)
     2. [Domain](./Readme_Sections/Architecture/Architecture.md#domain)
-        1. [User Session Feature](./Readme_Sections/Architecture/Architecture.md#1-user-session-feature)
-        2. [Update/Delete Account Feature](./Readme_Sections/Architecture/Architecture.md#2-updatedelete-account-feature)
-        3. [Store/Retrieve User Preferences Feature](./Readme_Sections/Architecture/Architecture.md#3-storeretrieve-user-preferences-feature)
-        4. [Nearby Restaurants Feature](./Readme_Sections/Architecture/Architecture.md#4-nearby-restaurants-feature)
-        5. [Fetch Restaurant Photo Feature](./Readme_Sections/Architecture/Architecture.md#5-fetch-restaurant-photo-feature)
-        6. [Restaurant Details Feature](./Readme_Sections/Architecture/Architecture.md#6-restaurant-details-feature)
-        7. [Autocomplete Restaurants Feature](./Readme_Sections/Architecture/Architecture.md#7-autocomplete-restaurants-feature)
-        8. [Add Review Feature](./Readme_Sections/Architecture/Architecture.md#8-add-review-feature)
-        9. [Get Reviews Feature](./Readme_Sections/Architecture/Architecture.md#9-get-reviews-feature)
-        10. [Location Feature](./Readme_Sections/Architecture/Architecture.md#10-location-feature)
+        1. [Transaction Feature](./Readme_Sections/Architecture/Architecture.md#1-user-session-feature)
     3. [Networking](./Readme_Sections/Architecture/Architecture.md#networking)
-        1. [Refresh Token Strategy](./Readme_Sections/Architecture/Architecture.md#1-refresh-token-strategy)
-        2. [Network Request Flow](./Readme_Sections/Architecture/Architecture.md#2-network-request-flow)
-        3. [Endpoint Creation](./Readme_Sections/Architecture/Architecture.md#3-endpoint-creation)
-        4. [Testing `Data` to `Decodable` Mapping](./Readme_Sections/Architecture/Architecture.md#4-testing-data-to-decodable-mapping)
-        5. [Parsing JSON Response](./Readme_Sections/Architecture/Architecture.md#5-parsing-json-response)
-    4. [Places](./Readme_Sections/Architecture/Architecture.md#places)
-    5. [API Infra](./Readme_Sections/Architecture/Architecture.md#api-infra)
-        1. [Mock Network Requests](./Readme_Sections/Architecture/Architecture.md#mock-network-requests)
-    6. [Persistence](./Readme_Sections/Architecture/Architecture.md#persistence)
-        1. [Cache Domain Models](./Readme_Sections/Architecture/Architecture.md#cache-domain-models)
-        2. [Infrastructure](./Readme_Sections/Architecture/Architecture.md#infrastructure)
-        3. [Store User Preferences](./Readme_Sections/Architecture/Architecture.md#store-user-preferences)
-    7. [Location](./Readme_Sections/Architecture/Architecture.md#location)
-        1. [From delegation to async/await](./Readme_Sections/Architecture/Architecture.md#from-delegation-to-asyncawait)
-        2. [Get current location using TDD](./Readme_Sections/Architecture/Architecture.md#get-current-location-using-tdd)
-    8. [Presentation](./Readme_Sections/Architecture/Architecture.md#presentation)
-    9. [UI](./Readme_Sections/Architecture/Architecture.md#ui)
-    10. [Main](./Readme_Sections/Architecture/Architecture.md#main)
-        1. [Adding caching by intercepting network requests](./Readme_Sections/Architecture/Architecture.md#adding-caching-by-intercepting-network-requests) (`Decorator Pattern`)
-        2. [Adding fallback strategies when network requests fail](./Readme_Sections/Architecture/Architecture.md#adding-fallback-strategies-when-network-requests-fail) (`Composite Pattern`)
-        3. [Handling navigation](./Readme_Sections/Architecture/Architecture.md#handling-navigation) (flat and hierarchical navigation)
+    4. [API Infra](./Readme_Sections/Architecture/Architecture.md#api-infra)
+    5. [Presentation](./Readme_Sections/Architecture/Architecture.md#presentation)
+    6. [UI](./Readme_Sections/Architecture/Architecture.md#ui)
+    7. [Main](./Readme_Sections/Architecture/Architecture.md#main)
 8. [Testing Strategy](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#testing-strategy)
-    1. [Summary Table](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#summary-table)
-    2. [Methodology](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#methodology)
-    3. [Unit Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#unit-tests)
-    4. [Integration Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#integration-tests)
+    1. [Unit Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#unit-tests)
+    2. [Integration Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#integration-tests)
         1. [End-to-End Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
-        2. [Cache Integration Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#cache-integration-tests)
-    5. [Snapshot Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
-9. [CI/CD](./Readme_Sections/CI_Security.md#cicd)
-10. [Security](./Readme_Sections/CI_Security.md#security)
-    1. [API key for Google Places API](./Readme_Sections/CI_Security.md#api-key-for-google-places-api)
-    2. [Store Tokens from FoodybiteServer in Keychain](./Readme_Sections/CI_Security.md#store-tokens-from-foodybiteserver-in-keychain)
-    3. [Password Hashing](./Readme_Sections/CI_Security.md#password-hashing)
-11. [Metrics](./Readme_Sections/Metrics/Metrics.md#metrics)
-    1. [Test lines of code per production lines of code](./Readme_Sections/Metrics/Metrics.md#test-lines-of-code-per-production-lines-of-code)
-    2. [Count of files changed](./Readme_Sections/Metrics/Metrics.md#count-of-files-changed)
-    3. [Code coverage](./Readme_Sections/Metrics/Metrics.md#code-coverage)
-12. [Credits](#credits)
-13. [References](#references)
+    3. [Snapshot Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
+9. [CI/CD](./Readme_Sections/CI_Security.md#cicd) (TODO / In Progress)
+10. [Security](./Readme_Sections/CI_Security.md#security) (TODO / In Progress)
+    1. [API key for TransactionApi](./Readme_Sections/CI_Security.md#api-key-for-google-places-api)
 
-## Motivation
-
-The initial spark of this project originated from my desire to dive deeper into `SwiftUI` since I had already been using the framework for testing purposes and was intrigued to use it in a larger project.
-
-Once I had completed the UI, I challenged myself to design the app in the best possible way using all the best practices in order to create a high-quality, polished project and sharpen my skills. At the same time, my interest in `TDD` and modular design were emerging, that's the reason I only used `TDD` for all modules besides the UI, which I later used for snapshot tests. 😀
-
-Through this process, I was able to significantly improve my `TDD` skills and acknowledge its value. First of all, it helped me understand better what I was trying to achieve and have a clear picture of what I wanted to test first before writing production code. On the other hand, the architecture seemed to materialize while I was writing the tests, and by using `TDD`, I could further improve the initial design.
-
-You can find below the entire process I've gone through while designing this project, the decisions and trade-offs regarding the architecture, testing pyramid and security issues. Additionally, I've included some really cool metrics about the evolution of the codebase.
 
 Thank you for reading and enjoy! 🚀
 
 ## Installation Guide
 
-### 1. Setup `Foodybite` backend
-- Download [`FoodybiteServer`](https://github.com/Marian25/FoodybiteServer) locally
-- Follow the instructions to run it
-
-### 2. Get your unique `API_Key` from `Google Places`
-- Go to [Google Maps Platform](https://developers.google.com/maps/documentation/places/web-service/cloud-setup) to create a project
-- Create the `API_KEY` following the [Use API Keys with Places API](https://developers.google.com/maps/documentation/places/web-service/get-api-key) documentation page (make sure you restrict your key to only be used with `Places API`)
-- Create a property list called `GooglePlaces-Info.plist` in the `FoodybitePlaces` framework
-- Add a row with `API_KEY` and the value of your key
-
-### 3. (Optionally) Install SwiftLint
-- run the following command in the terminal to install `swiftlint`
-
-```bash
-brew install swiftlint 
-```
-
-### 4. Validate the setup
-Test that everything is wired up correctly by running tests for the `FoodybiteAPIEndtoEndTests` and `CI` targets to check the communication with both backends and validate that all tests pass.
+### 1. Setup `WorldOfPAYBACK` 
+- clone the project and run the simulator.
+- Mock Server completes with success or failure by randomness.
+### 2. Validate the setup
+Test that everything is wired up correctly by running tests for `CI_IOS` targets to check the communication with both mocked backend and validate that all tests pass.
 
 ## Tools
-- ✅ Xcode 14.2
-- ✅ Swift 5.7
+- ✅ Xcode 15.0
+- ✅ swift-driver version: 1.87.1 Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
 
 ## Frameworks
 - ✅ SwiftUI
 - ✅ Combine
-- ✅ CoreData
-- ✅ CoreLocation
+- ✅ Foundation
+- ✅ UIKit
 
 ## Concepts
 - ✅ MVVM, Clean Architecture
 - ✅ Modular Design
 - ✅ SOLID Principles
-- ✅ TDD, Unit Testing, Integration Testing, Snapshot Testing
-- ✅ Composite, Decorator Patterns
+- ✅ TDD, Unit Testing, Integration Testing, Snapshot Testing and UI Testing using Page Object Pattern
+- ✅ Dependency injection and Dependency Inversion
+- ✅ Composition Root,Decorator Patterns
 - ✅ Domain-Driven Design
 
-## "WorldOfPAYBACK" App - Requirements
+## Requirements
 
 Please create a SwiftUI App based on the following User-Stories:
 
@@ -128,6 +71,14 @@ Please create a SwiftUI App based on the following User-Stories:
 ✅ As a user of the App, I want to get feedback when loading of the transactions is ongoing or an Error occurs. *(Just delay the mocked server response for 1-2 seconds and randomly fail it)*
 
 ✅ As a user of the App, I want to see an error if the device is offline.
+- From the Apple docs:
+`Always attempt to make a connection. Do not attempt to guess whether network service is available, and do not cache that determination.`
+It’s common to see iOS codebases using SCNetworkReachability, NWPathMonitor, or third-party reachability frameworks to make decisions about whether they should make a network request or not. Unfortunately, such a process is not reliable and can lead to bad customer experience.
+
+hence i did not use SCNetworkReachability or NWPathMonitor and just have a `generic Connection Error` in case my request fails
+
+i do have an implementation in another branch just incase though.
+
 
 ✅ As a user of the App, I want to filter the list of transactions by `category`.
 
