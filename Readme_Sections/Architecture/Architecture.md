@@ -69,7 +69,27 @@ public protocol TransactionLoader {
 
 ### #Api
 The following diagram showcases the Api layer, which communicates with my backend app. For a better understanding, 
+#### 1. RemoteTransactionLoader
 
+this class implements the transaction loader from the domain so we invert the depedency and instead of our domain depending on the api our api depends on domain and our domain can be independent of any dependency.
+
+```
+public class RemoteTransactionLoader: TransactionLoader {
+    
+    public typealias Result = TransactionLoader.Result
+    
+    private let url: URL
+    private let client: HTTPClient
+...
+```
+
+it also takes in http protocol to fetch data so RemoteTransactionLoader doesn't care about the implementaion details of the http protocol so it can be URLSession or Alamofire and in our case we use a mock backend.
+
+#### 2. Api Infra
+```
+public class HTTPClientStub: HTTPClient {}
+```
+our implementor of httpclient is a mocked backend but we can always replace it with any other implementation . 
    
 #### 3. Endpoint Creation
 i separated endpoint creation with relation to the feature so i have to edit a file containing related endpoints to the one I want to add (this case still violates the principle, but considering the relatedness of the endpoints I think it's a good trade-off for now).
@@ -166,7 +186,7 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
 This module is responsible for instantiation and composing all independent modules in a centralized location which simplifies the management of modules, components and their dependencies, thus removing the need for them to communicate directly, increasing the composability and extensibility of the system (`Open/Closed Principle`).
 
 Moreover, it represents the composition root of the app and handles the following responsiblities:
-1. Responsible for the Instantiation and life cycle of all  classes and structs,
+1. Responsible for the Instantiation and life cycle of all modules.
 2. [Adding Sorting Behaviour by intercepting Transaction Loader](#adding-caching-by-intercepting-network-requests) (`Decorator Pattern`)
 3. [Handling navigation](#handling-navigation) (flat and hierarchical navigation)
 
