@@ -36,7 +36,7 @@ Thank you for reading and enjoy! 🚀
 ## Installation Guide
 
 ### 1. Setup `WorldOfPAYBACK` 
-- clone the project and run the simulator.
+- clone the project from the main branch and run the simulator.
 - Mock Server completes with success or failure by randomness.
 ### 2. Validate the setup
 Test that everything is wired up correctly by running tests for `CI_IOS` targets to check the communication with both mocked backend and validate that all tests pass.
