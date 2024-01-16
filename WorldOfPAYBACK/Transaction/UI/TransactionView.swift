@@ -14,7 +14,6 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
     let transactionFilterView: (Binding<Int>,[Int]) -> TransactionFilterView
     let totalCountView:(Binding<Int>) -> TotalCountView
     
-    @StateObject var monitor = Monitor()
 
     public init(
         viewModel: TransactionViewModel,
@@ -32,20 +31,7 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
     }
 
     public var body: some View {
-        if monitor.status == .connected {
-            VStack {
-                Text("No Internet Connection")
-                Button(action: {
-                    viewModel.getAllTransactions()
-                }) {
-                    Text("Retry")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.primary)
-                        .cornerRadius(10)
-                }
-            }
-        }else{
+        
             VStack {
                 switch viewModel.getTransactionsState {
                 case .idle:
@@ -105,7 +91,7 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
                 viewModel.getAllTransactions()
             }
         }
-    }
+    
 }
 
  

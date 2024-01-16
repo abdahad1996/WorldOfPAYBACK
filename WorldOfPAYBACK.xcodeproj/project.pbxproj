@@ -72,7 +72,6 @@
 		541D63462B554DC10089CC07 /* test_homeViewFailureState.light.png in Resources */ = {isa = PBXBuildFile; fileRef = 541D633E2B554DC10089CC07 /* test_homeViewFailureState.light.png */; };
 		541D63472B554DC10089CC07 /* test_homeViewLoadingState.light.png in Resources */ = {isa = PBXBuildFile; fileRef = 541D633F2B554DC10089CC07 /* test_homeViewLoadingState.light.png */; };
 		541D63482B554DC10089CC07 /* test_homeViewIdleState.dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 541D63402B554DC10089CC07 /* test_homeViewIdleState.dark.png */; };
-		541D634F2B56711C0089CC07 /* internetStatusMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541D634E2B56711C0089CC07 /* internetStatusMonitor.swift */; };
 		54AA47382B50997200CF6AD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA47372B50997200CF6AD1 /* AppDelegate.swift */; };
 		54AA473A2B50997200CF6AD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA47392B50997200CF6AD1 /* SceneDelegate.swift */; };
 		54AA47412B50997300CF6AD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54AA47402B50997300CF6AD1 /* Assets.xcassets */; };
@@ -173,7 +172,6 @@
 		541D63402B554DC10089CC07 /* test_homeViewIdleState.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_homeViewIdleState.dark.png; sourceTree = "<group>"; };
 		541D634A2B554E4A0089CC07 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		541D634B2B559D140089CC07 /* CI_iOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI_iOS.xctestplan; sourceTree = "<group>"; };
-		541D634E2B56711C0089CC07 /* internetStatusMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = internetStatusMonitor.swift; sourceTree = "<group>"; };
 		54AA47342B50997200CF6AD1 /* WorldOfPAYBACK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldOfPAYBACK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54AA47372B50997200CF6AD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54AA47392B50997200CF6AD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -568,7 +566,6 @@
 				54AA47402B50997300CF6AD1 /* Assets.xcassets */,
 				54AA47422B50997300CF6AD1 /* LaunchScreen.storyboard */,
 				54AA47452B50997300CF6AD1 /* Info.plist */,
-				541D634E2B56711C0089CC07 /* internetStatusMonitor.swift */,
 			);
 			path = WorldOfPAYBACK;
 			sourceTree = "<group>";
@@ -885,7 +882,6 @@
 				541D63242B55310A0089CC07 /* NumberFormatter+Helper.swift in Sources */,
 				541D62C82B54CB1A0089CC07 /* TransactionDetailFactory.swift in Sources */,
 				541D628F2B537CA90089CC07 /* TransactionViewModel.swift in Sources */,
-				541D634F2B56711C0089CC07 /* internetStatusMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1224,8 +1220,8 @@
 				INFOPLIST_FILE = WorldOfPAYBACK/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1252,8 +1248,8 @@
 				INFOPLIST_FILE = WorldOfPAYBACK/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
