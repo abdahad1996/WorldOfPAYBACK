@@ -8,10 +8,11 @@
 
 1. [Installation Guide](#installation-guide)
 2. [Demo Videos](./Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
-3. [Requirements](#tools)
-4. [Frameworks](#frameworks)
-5. [Concepts](#concepts)
-6. [Architecture](./Readme_Sections/Architecture/Architecture.md#architecture)
+3. [Requirements](#"WorldOfPAYBACK" App - Requirements)
+4. [Tools](#tools)
+5. [Frameworks](#frameworks)
+6. [Concepts](#concepts)
+7. [Architecture](./Readme_Sections/Architecture/Architecture.md#architecture)
     1. [Overview](./Readme_Sections/Architecture/Architecture.md#overview)
     2. [Domain](./Readme_Sections/Architecture/Architecture.md#domain)
         1. [Transaction Feature](./Readme_Sections/Architecture/Architecture.md#1-user-session-feature)
@@ -72,7 +73,7 @@ Thank you for reading and enjoy! 🚀
 
 ### 1. Setup `WorldOfPAYBACK` backend
 
-### 4. Validate the setup
+### 2. Validate the setup
 Test that everything is wired up correctly by running tests for `CI_IOS` targets to check the communication with both mocked backend and validate that all tests pass.
 
 ## Tools
