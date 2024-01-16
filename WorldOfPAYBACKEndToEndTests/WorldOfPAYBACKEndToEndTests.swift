@@ -66,7 +66,7 @@ final class WorldOfPAYBACKEndToEndTests: XCTestCase {
     }
     
     private func StubClient(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
-        let client = HTTPClientStub()
+        let client = HTTPClientStub(isTesting: true)
         trackForMemoryLeaks(client, file: file, line: line)
         return client
     }

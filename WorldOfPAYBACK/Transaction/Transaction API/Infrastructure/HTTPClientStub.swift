@@ -17,8 +17,10 @@ extension HTTPURLResponse {
 }
 
 public class HTTPClientStub: HTTPClient {
-    public init() {
-        
+    
+    let isE2ETesting:Bool
+    public init(isTesting:Bool = false) {
+        self.isE2ETesting = isTesting
     }
     
     public func get(from url: URL, Completion: @escaping (HTTPClient.Result) -> Void) {
@@ -29,7 +31,7 @@ public class HTTPClientStub: HTTPClient {
         
        let randomBool =  Bool.random()
         
-        if CommandLine.arguments.contains("success") {
+        if CommandLine.arguments.contains("success") || isE2ETesting {
             Completion(.success((data, HTTPURLResponse(statusCode: 200))))
             return
         }
