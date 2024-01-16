@@ -73,7 +73,7 @@ The following diagram showcases the Api layer, which communicates with my backen
 
 this class implements the transaction loader from the domain so we invert the depedency and instead of our domain depending on the api our api depends on domain and our domain can be independent of any dependency.
 
-```
+```swift
 public class RemoteTransactionLoader: TransactionLoader {
     
     public typealias Result = TransactionLoader.Result
@@ -86,14 +86,14 @@ public class RemoteTransactionLoader: TransactionLoader {
 it also takes in http protocol to fetch data so RemoteTransactionLoader doesn't care about the implementaion details of the http protocol so it can be URLSession or Alamofire and in our case we use a mock backend.
 
 #### 2. Api Infra
-```
+```swift
 public class HTTPClientStub: HTTPClient {}
 ```
 our implementor of httpclient is a mocked backend but we can always replace it with any other implementation . 
    
 #### 3. Endpoint Creation
 i separated endpoint creation with relation to the feature so i have to edit a file containing related endpoints to the one I want to add (this case still violates the principle, but considering the relatedness of the endpoints I think it's a good trade-off for now).
-```
+```swift
 public enum TransactionsEndpoint {
     case get
     
@@ -128,7 +128,7 @@ Since all modules use the `async/await` concurrency module, I needed to switch f
 
 > ❗️ Resuming a continuation must be made exactly once. Otherwise, it results in undefined behaviour, that's why I set it to nil after each resume call, to prevent calling it on the same instance again. Not calling it leaves the task in a suspended state indefinitely. (Apple docs: [CheckedContinuation](https://developer.apple.com/documentation/swift/checkedcontinuation))
 
-```
+```swift
 extension TransactionLoader {
     public func load() async throws -> [TransactionItem] {
         return try await withCheckedThrowingContinuation { continuation in
@@ -188,7 +188,7 @@ This module is responsible for instantiation and composing all independent modul
 Moreover, it represents the composition root of the app and handles the following responsiblities:
 1. Responsible for the Instantiation and life cycle of all modules.
 2. [Adding Sorting Behaviour by intercepting Transaction Loader](#adding-caching-by-intercepting-network-requests) (`Decorator Pattern`)
-3. [Handling navigation](#handling-navigation) (flat and hierarchical navigation)
+3. [Handling navigation](#handling-navigation) (hierarchical navigation)
 
 
 
