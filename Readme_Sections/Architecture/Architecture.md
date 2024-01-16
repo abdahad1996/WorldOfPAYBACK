@@ -6,7 +6,7 @@ For this project, I organized the codebase into `Vertical Slices or Vertical fea
 
 > ❗️ High-level modules should not depend on lower-level modules and lower-level modules should only communicate and know about the next higher-level layer.
 
-In my opinion, it's the best approach for this kind of project since `vertical slicing` is  suitable for larger projects with feature teams and keeping in view of future i thought this was the best way to go forward.
+In my opinion, it's the best approach for this kind of project since `vertical slicing` is  suitable for larger projects with feature teams and keeping in view of future i thought this was the best way to go forward. I didn't create framework or packages but kept it simple using folder separation but i kept everything decoupled so it won't be hard to switch to packages or framework in the future.
 
 The following diagram shows a high level structure of the whole app
 
