@@ -55,24 +55,21 @@
         1. [End-to-End Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
         2. [Cache Integration Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#cache-integration-tests)
     5. [Snapshot Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
-9. [CI/CD](./Readme_Sections/CI_Security.md#cicd)
-10. [Security](./Readme_Sections/CI_Security.md#security)
+9. [CI/CD](./Readme_Sections/CI_Security.md#cicd)(TODO/IMPROVEMENT)
+10. [Security](./Readme_Sections/CI_Security.md#security)(TODO/IMPROVEMENT)
     1. [API key for Google Places API](./Readme_Sections/CI_Security.md#api-key-for-google-places-api)
     2. [Store Tokens from FoodybiteServer in Keychain](./Readme_Sections/CI_Security.md#store-tokens-from-foodybiteserver-in-keychain)
     3. [Password Hashing](./Readme_Sections/CI_Security.md#password-hashing)
-11. [Metrics](./Readme_Sections/Metrics/Metrics.md#metrics)
-    1. [Test lines of code per production lines of code](./Readme_Sections/Metrics/Metrics.md#test-lines-of-code-per-production-lines-of-code)
-    2. [Count of files changed](./Readme_Sections/Metrics/Metrics.md#count-of-files-changed)
-    3. [Code coverage](./Readme_Sections/Metrics/Metrics.md#code-coverage)
-
+11. 
 
 
 Thank you for reading and enjoy! 🚀
 
 ## Installation Guide
 
-### 1. Setup `WorldOfPAYBACK` backend
-
+### 1. Setup `WorldOfPAYBACK` 
+- clone the project and run the simulator.
+- Mock Server completes with success or failure by randomness.
 ### 2. Validate the setup
 Test that everything is wired up correctly by running tests for `CI_IOS` targets to check the communication with both mocked backend and validate that all tests pass.
 
@@ -106,6 +103,14 @@ Please create a SwiftUI App based on the following User-Stories:
 ✅ As a user of the App, I want to get feedback when loading of the transactions is ongoing or an Error occurs. *(Just delay the mocked server response for 1-2 seconds and randomly fail it)*
 
 ✅ As a user of the App, I want to see an error if the device is offline.
+- From the Apple docs:
+`Always attempt to make a connection. Do not attempt to guess whether network service is available, and do not cache that determination.`
+It’s common to see iOS codebases using SCNetworkReachability, NWPathMonitor, or third-party reachability frameworks to make decisions about whether they should make a network request or not. Unfortunately, such a process is not reliable and can lead to bad customer experience.
+
+hence i did not use SCNetworkReachability or NWPathMonitor and just have a `generic Connection Error` in case my request fails
+
+i do have an implementation in another branch just incase though.
+
 
 ✅ As a user of the App, I want to filter the list of transactions by `category`.
 
