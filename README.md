@@ -4,7 +4,7 @@
 
 # WorldOfPAYBACK
 
-💡 My Motivation for this was based on simulating the payback environment which was mentioned in the docs and i made sure i had those points in my mind 
+💡 My Motivation for this was based on simulating the payback environment which was mentioned in the docs making sure i think of the design in a critical and scalable way backed by tests which was very fun to do and i would like to thank the payback team for designing such a coding challenge.
 
 1. [Installation Guide](#installation-guide)
 2. [Demo Videos](./Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
