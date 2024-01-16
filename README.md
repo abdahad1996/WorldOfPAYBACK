@@ -8,7 +8,7 @@
 
 1. [Installation Guide](#installation-guide)
 2. [Demo Videos](./Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
-3. [Requirements](#"WorldOfPAYBACK" App - Requirements)
+3. [Requirements](#Requirements)
 4. [Tools](#tools)
 5. [Frameworks](#frameworks)
 6. [Concepts](#concepts)
@@ -95,7 +95,7 @@ Test that everything is wired up correctly by running tests for `CI_IOS` targets
 - ✅ Composition Root,Decorator Patterns
 - ✅ Domain-Driven Design
 
-## "WorldOfPAYBACK" App - Requirements
+## Requirements
 
 Please create a SwiftUI App based on the following User-Stories:
 
