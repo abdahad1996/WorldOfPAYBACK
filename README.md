@@ -1,19 +1,20 @@
-[![CI-iOS](https://github.com/Marian25/Foodybite/actions/workflows/ios.yml/badge.svg)](https://github.com/Marian25/Foodybite/actions/workflows/ios.yml)
+[![CI-iOS](https://github.com/abdahad1996/WorldOfPAYBACK/actions/workflows/ios.yml/badge.svg)](https://github.com/abdahad1996/WorldOfPAYBACK/actions/workflows/ios.yml) ( The tests work locally just need to fix them on CI :P )
 
-# Foodybite
+<img width="484" alt="Screenshot 2024-01-16 at 08 26 51" src="https://github.com/abdahad1996/WorldOfPAYBACK/assets/28492677/8ab18738-881a-45af-b1d7-31d8833cf147">
 
-💡 My vision for this project is centered around a simple yet powerful way to create a user-friendly app that helps you find the best restaurant near you based on location, radius, and number of stars. Additionally, users can see details, like opening hours, address, reviews, or photos for each restaurant found and give a review. The app allows users to search directly for a restaurant and enables them to give a review right away.
+# WorldOfPAYBACK
 
-1. [Motivation](#motivation)
-2. [Installation Guide](#installation-guide)
-3. [Demo Videos](./Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
-4. [Requirements](#tools)
-5. [Frameworks](#frameworks)
-6. [Concepts](#concepts)
-7. [Architecture](./Readme_Sections/Architecture/Architecture.md#architecture)
+💡 My Motivation for this was based on simulating the payback environment which was mentioned in the docs and i made sure i had those points in my mind 
+
+1. [Installation Guide](#installation-guide)
+2. [Demo Videos](./Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
+3. [Requirements](#tools)
+4. [Frameworks](#frameworks)
+5. [Concepts](#concepts)
+6. [Architecture](./Readme_Sections/Architecture/Architecture.md#architecture)
     1. [Overview](./Readme_Sections/Architecture/Architecture.md#overview)
     2. [Domain](./Readme_Sections/Architecture/Architecture.md#domain)
-        1. [User Session Feature](./Readme_Sections/Architecture/Architecture.md#1-user-session-feature)
+        1. [Transaction Feature](./Readme_Sections/Architecture/Architecture.md#1-user-session-feature)
         2. [Update/Delete Account Feature](./Readme_Sections/Architecture/Architecture.md#2-updatedelete-account-feature)
         3. [Store/Retrieve User Preferences Feature](./Readme_Sections/Architecture/Architecture.md#3-storeretrieve-user-preferences-feature)
         4. [Nearby Restaurants Feature](./Readme_Sections/Architecture/Architecture.md#4-nearby-restaurants-feature)
@@ -62,59 +63,35 @@
     1. [Test lines of code per production lines of code](./Readme_Sections/Metrics/Metrics.md#test-lines-of-code-per-production-lines-of-code)
     2. [Count of files changed](./Readme_Sections/Metrics/Metrics.md#count-of-files-changed)
     3. [Code coverage](./Readme_Sections/Metrics/Metrics.md#code-coverage)
-12. [Credits](#credits)
-13. [References](#references)
 
-## Motivation
 
-The initial spark of this project originated from my desire to dive deeper into `SwiftUI` since I had already been using the framework for testing purposes and was intrigued to use it in a larger project.
-
-Once I had completed the UI, I challenged myself to design the app in the best possible way using all the best practices in order to create a high-quality, polished project and sharpen my skills. At the same time, my interest in `TDD` and modular design were emerging, that's the reason I only used `TDD` for all modules besides the UI, which I later used for snapshot tests. 😀
-
-Through this process, I was able to significantly improve my `TDD` skills and acknowledge its value. First of all, it helped me understand better what I was trying to achieve and have a clear picture of what I wanted to test first before writing production code. On the other hand, the architecture seemed to materialize while I was writing the tests, and by using `TDD`, I could further improve the initial design.
-
-You can find below the entire process I've gone through while designing this project, the decisions and trade-offs regarding the architecture, testing pyramid and security issues. Additionally, I've included some really cool metrics about the evolution of the codebase.
 
 Thank you for reading and enjoy! 🚀
 
 ## Installation Guide
 
-### 1. Setup `Foodybite` backend
-- Download [`FoodybiteServer`](https://github.com/Marian25/FoodybiteServer) locally
-- Follow the instructions to run it
-
-### 2. Get your unique `API_Key` from `Google Places`
-- Go to [Google Maps Platform](https://developers.google.com/maps/documentation/places/web-service/cloud-setup) to create a project
-- Create the `API_KEY` following the [Use API Keys with Places API](https://developers.google.com/maps/documentation/places/web-service/get-api-key) documentation page (make sure you restrict your key to only be used with `Places API`)
-- Create a property list called `GooglePlaces-Info.plist` in the `FoodybitePlaces` framework
-- Add a row with `API_KEY` and the value of your key
-
-### 3. (Optionally) Install SwiftLint
-- run the following command in the terminal to install `swiftlint`
-
-```bash
-brew install swiftlint 
-```
+### 1. Setup `WorldOfPAYBACK` backend
 
 ### 4. Validate the setup
-Test that everything is wired up correctly by running tests for the `FoodybiteAPIEndtoEndTests` and `CI` targets to check the communication with both backends and validate that all tests pass.
+Test that everything is wired up correctly by running tests for `CI_IOS` targets to check the communication with both mocked backend and validate that all tests pass.
 
 ## Tools
-- ✅ Xcode 14.2
-- ✅ Swift 5.7
+- ✅ Xcode 15.0
+- ✅ swift-driver version: 1.87.1 Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
 
 ## Frameworks
 - ✅ SwiftUI
 - ✅ Combine
-- ✅ CoreData
-- ✅ CoreLocation
+- ✅ Foundation
+- ✅ UIKit
 
 ## Concepts
 - ✅ MVVM, Clean Architecture
 - ✅ Modular Design
 - ✅ SOLID Principles
-- ✅ TDD, Unit Testing, Integration Testing, Snapshot Testing
-- ✅ Composite, Decorator Patterns
+- ✅ TDD, Unit Testing, Integration Testing, Snapshot Testing and UI Testing using Page Object Pattern
+- ✅ Dependency injection and Dependency Inversion
+- ✅ Composition Root,Decorator Patterns
 - ✅ Domain-Driven Design
 
 ## "WorldOfPAYBACK" App - Requirements
