@@ -55,11 +55,9 @@
         1. [End-to-End Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
         2. [Cache Integration Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#cache-integration-tests)
     5. [Snapshot Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
-9. [CI/CD](./Readme_Sections/CI_Security.md#cicd)(TODO/IMPROVEMENT)
-10. [Security](./Readme_Sections/CI_Security.md#security)(TODO/IMPROVEMENT)
+9. [CI/CD](./Readme_Sections/CI_Security.md#cicd) (TODO / In Progress)
+10. [Security](./Readme_Sections/CI_Security.md#security) (TODO / In Progress)
     1. [API key for Google Places API](./Readme_Sections/CI_Security.md#api-key-for-google-places-api)
-    2. [Store Tokens from FoodybiteServer in Keychain](./Readme_Sections/CI_Security.md#store-tokens-from-foodybiteserver-in-keychain)
-    3. [Password Hashing](./Readme_Sections/CI_Security.md#password-hashing)
 11. 
 
 
