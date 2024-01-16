@@ -101,7 +101,11 @@ i do have an implementation in another branch just incase though.
     2. "Online Shopping"-Feature: Lists PAYBACK Partners and gives the possibility to jump to their App/Website.
     3. "Settings"-Feature: Gives the possibility to adjust general Settings.
 
-`features can be vertically sliced and composed in the main module by following dependency injection / inversion , clean architecture and domain driven design which allows to have decoupled modules and gives you the freedom to compose however you like. Makes the code more testable maintainable and soft making it easy to add new requirements`
+`features can be vertically sliced and composed in the main module by following dependency injection / inversion , clean architecture and domain driven design which allows to have decoupled modules and gives you the freedom to compose however you like. Makes the code more testable maintainable and soft making it easy to add new requirements. I added in a general example of a design diagram below`
+
+<img width="1010" alt="Screenshot 2024-01-16 at 14 41 50" src="https://github.com/abdahad1996/WorldOfPAYBACK/assets/28492677/e9b1e6c3-1dc8-41ba-be44-6041d32aee2e">
+
+
 
 ## PAYBACK Environment(this code was build thinking in terms of the PAYBACK environment)
  # transition phase of moving from UIKit to SwiftUI.
