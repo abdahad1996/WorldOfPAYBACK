@@ -13,6 +13,8 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
     let transactionCell: (TransactionItem) -> TransactionCell
     let transactionFilterView: (Binding<Int>,[Int]) -> TransactionFilterView
     let totalCountView:(Binding<Int>) -> TotalCountView
+    
+    @StateObject var monitor = Monitor()
 
     public init(
         viewModel: TransactionViewModel,
@@ -30,63 +32,78 @@ public struct TransactionsView<TransactionCell: View, TransactionFilterView: Vie
     }
 
     public var body: some View {
-        VStack {
-            switch viewModel.getTransactionsState {
-            case .idle:
-                EmptyView()
-
-            case .isLoading:
-                ProgressView()
-                Spacer()
-
-            case .failure(let error):
-//                Text(error.rawValue)
-//                    .foregroundColor(.red)
-//                Spacer()
-                VStack {
-                    Text(error)
-                    Button(action: {
-                        viewModel.getAllTransactions()
-                    }) {
-                        Text("Retry")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.primary)
-                            .cornerRadius(10)
-                    }
+        if monitor.status == .connected {
+            VStack {
+                Text("No Internet Connection")
+                Button(action: {
+                    viewModel.getAllTransactions()
+                }) {
+                    Text("Retry")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.primary)
+                        .cornerRadius(10)
                 }
-
-            case .success:
-                ScrollView(.vertical, showsIndicators: false) {
-                    transactionFilterView($viewModel.filteredCategory,viewModel.UniqueCategories)
-                        .padding(.bottom)
-
-                    LazyVStack {
-                        ForEach(Array(viewModel.filteredTransactions.enumerated()),id: \.element) { index, transaction in
-                            transactionCell(transaction)
-                                .background(Color(uiColor: .systemBackground))
-                                .cornerRadius(16)
-                                .frame(maxWidth: .infinity)
-                            
-                                .aspectRatio(0.75, contentMode: .fit)
-                                .padding(4)
-                                .shadow(color: .gray, radius: 2)
-                                .onTapGesture {
-                                    showTransactionDetails(transaction)
-                                }.accessibilityIdentifier("UICellVertical\(index)")
-                        }
-                        
-                    }.accessibilityIdentifier("list")
-                }.overlay(FloatingView(count: $viewModel.totalAmount), alignment: .bottom)
             }
-        }.refreshable {
-            viewModel.getAllTransactions()
-        } 
-        .padding(.horizontal)
-        .task {
-            guard viewModel.getTransactionsState == .idle else { return }
-
-             viewModel.getAllTransactions()
+        }else{
+            VStack {
+                switch viewModel.getTransactionsState {
+                case .idle:
+                    EmptyView()
+                    
+                case .isLoading:
+                    ProgressView()
+                    Spacer()
+                    
+                case .failure(let error):
+                    //                Text(error.rawValue)
+                    //                    .foregroundColor(.red)
+                    //                Spacer()
+                    VStack {
+                        Text(error)
+                        Button(action: {
+                            viewModel.getAllTransactions()
+                        }) {
+                            Text("Retry")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.primary)
+                                .cornerRadius(10)
+                        }
+                    }
+                    
+                case .success:
+                    ScrollView(.vertical, showsIndicators: false) {
+                        transactionFilterView($viewModel.filteredCategory,viewModel.UniqueCategories)
+                            .padding(.bottom)
+                        
+                        LazyVStack {
+                            ForEach(Array(viewModel.filteredTransactions.enumerated()),id: \.element) { index, transaction in
+                                transactionCell(transaction)
+                                    .background(Color(uiColor: .systemBackground))
+                                    .cornerRadius(16)
+                                    .frame(maxWidth: .infinity)
+                                
+                                    .aspectRatio(0.75, contentMode: .fit)
+                                    .padding(4)
+                                    .shadow(color: .gray, radius: 2)
+                                    .onTapGesture {
+                                        showTransactionDetails(transaction)
+                                    }.accessibilityIdentifier("UICellVertical\(index)")
+                            }
+                            
+                        }.accessibilityIdentifier("list")
+                    }.overlay(FloatingView(count: $viewModel.totalAmount), alignment: .bottom)
+                }
+            }.refreshable {
+                viewModel.getAllTransactions()
+            }
+            .padding(.horizontal)
+            .task {
+                guard viewModel.getTransactionsState == .idle else { return }
+                
+                viewModel.getAllTransactions()
+            }
         }
     }
 }

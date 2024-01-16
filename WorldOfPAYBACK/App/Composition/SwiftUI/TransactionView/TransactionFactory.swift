@@ -20,6 +20,7 @@ public final class TransactionFactory {
     ) -> UIViewController {
         let mainQueueLoader = MainQueueDispatchDecorator2(decoratee: loader)
         let sortedLoader = SortingRemoteTransactionLoaderDecorator(loader: mainQueueLoader, sortingPolicy: SortingPolicy())
+        
         let viewModel = TransactionViewModel(transactionLoader: sortedLoader)
 
         let view =  TransactionsView(viewModel: viewModel, showTransactionDetails: {  transactionItem in
