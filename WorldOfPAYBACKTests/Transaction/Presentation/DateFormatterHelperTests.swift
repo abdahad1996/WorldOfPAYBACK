@@ -13,7 +13,8 @@ class DateFormatterHelperTests: XCTestCase {
 
     func testDateFormattingWithDefaultLocale() {
         // Given
-        let inputDate = Date(timeIntervalSince1970: 1642435200) // 19th January 2022
+        let inputDate = Date(timeIntervalSince1970: 1642435200)
+        // 19th January 2022
         let expectedFormattedString = "Jan 17, 2022 at 5:00 PM"  // Update this based on your expectations
 
         // When
