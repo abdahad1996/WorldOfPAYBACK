@@ -2,6 +2,9 @@
 
 <img width="484" alt="Screenshot 2024-01-16 at 08 26 51" src="https://github.com/abdahad1996/WorldOfPAYBACK/assets/28492677/8ab18738-881a-45af-b1d7-31d8833cf147">
 
+# SUMMARY
+PS: `THIS MAY SEEM OVERCOMPLEX BUT IT IS JUST A SHOWCASE INTERMS OF THE REQUIREMENTS AND THE FUTURE YOU HAVE IN MIND . I CAN VERY EASILY CREATE A SIMPLE VERSION OF THIS . HENCE I TRIED TO DOCUMENT EVERYTHING BUT IN SHORT OR A SUMMARY THIS PROJECT HAS 2 FEATURE LAYERS I VIRTUALLY SEPARATED IN FOLDERS CALLED TRANSACTION AND TRANSACTION DETAILS . THE FEATURE LAYERS CONTAINS THEIR OWN USECASES AND API LAYER . IN THE APP FOLDER IS THE COMPOSITION AND NAVIGATION WHERE I COMPOSE THE OVERALL OBJECT GRAPH AND PASS IT TO THE SCENE DELEGATE TO RUN. `
+
 # WorldOfPAYBACK
 
 💡 My Motivation for this was based on simulating the payback environment which was mentioned in the docs making sure i think of the design in a critical and scalable way backed by tests which was very fun to do and i would like to thank the payback team for designing such a coding challenge.
