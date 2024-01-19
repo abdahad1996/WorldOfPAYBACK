@@ -1,9 +1,0 @@
-/* 
-  Localizable.strings
-  WorldOfPAYBACK
-
-  Created by Abdul Ahad on 15.01.24.
-  
-*/
-"GENERIC_CONNECTION_ERROR" = "Es konnte keine Verbindung zum Server hergestellt werden";
-"TRANSACTION_VIEW_TITLE" = "Transaktionen";
