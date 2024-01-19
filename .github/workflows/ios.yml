@@ -26,8 +26,30 @@ jobs:
       
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
+      
+    - run: brew install xctesthtmlreport
 
     - name: Build and Test
-      run: xcodebuild -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" -testPlan "CI_iOS" -only-test-configuration "English" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13" ONLY_ACTIVE_ARCH=YES test
+      run: xcodebuild test -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" -testPlan "CI_iOS" -only-test-configuration "English" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13" ONLY_ACTIVE_ARCH=YES -resultBundlePath TestResult | xcpretty
+      
 
+    - name: Generate Test Report
+        run: xchtmlreport TestResult.xcresult    
+    
+    - name: Deploy to GitHub Pages
+         uses: peaceiris/actions-gh-pages@v3.9.2
+         with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./
+           
+    - name: HTML Report
+         run: echo "https://$GITHUB_REPOSITORY_OWNER.github.io/beautifying-xctest-results/$GITHUB_RUN_ID"
+
+    - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3.9.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: '.github,XCTestReport.xcodeproj,XCTestReport,XCTestReportUITests'
+          destination_dir: ${{ github.run_id }}
    
