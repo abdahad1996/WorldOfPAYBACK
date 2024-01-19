@@ -27,7 +27,9 @@ jobs:
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
 
-   
+    - name: xcresulttool
+      uses: kishikawakatsumi/xcresulttool@v1.7.1
+            
       
     - name: Build and Test
       run: xcodebuild -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" -resultBundlePath TestResults -testPlan "CI_iOS" -only-test-configuration "English" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13" ONLY_ACTIVE_ARCH=YES test
