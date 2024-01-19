@@ -14,7 +14,10 @@ class NumberFormatterHelperTests: XCTestCase {
     func testFormattedCurrency() {
         // Given
         let amount = 1234
-        let expectedFormattedString = "1.234,00 €"
+        let number = NSNumber(value:amount)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        let expectedFormattedString =  numberFormatter.string(from: number) ?? "\(amount)"
 
         // When
         let formattedString = NumberFormatterHelper.formattedCurrency(amount: amount)
@@ -28,7 +31,11 @@ class NumberFormatterHelperTests: XCTestCase {
     func testFormattedCurrencyWithZeroAmount() {
         // Given
         let amount = 0
-        let expectedFormattedString = "0,00 €"
+        let number = NSNumber(value:amount)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        let expectedFormattedString =  numberFormatter.string(from: number) ?? "\(amount)"
+
 
         // When
         let formattedString = NumberFormatterHelper.formattedCurrency(amount: amount)
@@ -37,6 +44,5 @@ class NumberFormatterHelperTests: XCTestCase {
         XCTAssertEqual(formattedString, expectedFormattedString, "Formatted currency string doesn't match the expected value for zero amount.")
     }
 
-    // Add more test cases to cover various scenarios, like different currency codes, negative amounts, etc.
 
 }

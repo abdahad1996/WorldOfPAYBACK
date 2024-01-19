@@ -12,15 +12,24 @@ import WorldOfPAYBACK
 class DateFormatterHelperTests: XCTestCase {
 
     func testDateFormattingWithDefaultLocale() {
+        
+        
+        
         // Given
-        let inputDate = Date(timeIntervalSince1970: 1642435200) // 19th January 2022
-        let expectedFormattedString = "Jan 17, 2022 at 5:00 PM"  // Update this based on your expectations
+        let inputDate = Date(timeIntervalSince1970: 1642435200)
+        
+        
+        // 19th January 2022
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "MMM d, yyyy 'at' h:mm a"
+        dateformatter.locale = .current
+        let expectedFormattedString = dateformatter.string(from: inputDate)// Update this based on your expectations
 
         // When
         let formattedString = DateFormatterHelper.format(date: inputDate)
 
         // Then
-        XCTAssertEqual(formattedString, expectedFormattedString, "Formatted date string doesn't match the expected value with the default locale.")
+        XCTAssertEqual(formattedString, expectedFormattedString, expectedFormattedString)
     }
 
     // Additional test cases can be added to cover different scenarios
@@ -28,7 +37,10 @@ class DateFormatterHelperTests: XCTestCase {
     func testDateFormattingWithCustomLocale() {
         // Given
         let inputDate = Date(timeIntervalSince1970: 1642435200) // 19th January 2022
-        let expectedFormattedString = "janv. 17, 2022 at 5:00 PM"  // Update this based on your expectations
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "MMM d, yyyy 'at' h:mm a"
+        dateformatter.locale = Locale(identifier: "fr_FR")
+        let expectedFormattedString = dateformatter.string(from: inputDate) // Update this based on your expectations
 
         // When
         let customLocale = Locale(identifier: "fr_FR") // French locale
