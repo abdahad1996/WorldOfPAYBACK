@@ -30,7 +30,7 @@ jobs:
     - run: brew install xctesthtmlreport
 
     - name: Build and Test
-      run: xcodebuild test -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" -testPlan "CI_iOS" -only-test-configuration "English" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13" ONLY_ACTIVE_ARCH=YES -resultBundlePath TestResult | xcpretty
+      run: xcodebuild test -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" -testPlan "CI_iOS" -only-test-configuration "English" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 15" ONLY_ACTIVE_ARCH=YES -resultBundlePath TestResult | xcpretty
       
 
     - name: Generate Test Report
