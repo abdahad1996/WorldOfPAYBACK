@@ -28,12 +28,6 @@ jobs:
       run: /usr/bin/xcodebuild -version
 
     - name: Build and Test
-      run: xcodebuild -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" -resultBundlePath $(BUILD_DIR)/$(SCHEME).xcresult -testPlan "CI_iOS" -only-test-configuration "English" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13" ONLY_ACTIVE_ARCH=YES test
+      run: xcodebuild -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" -testPlan "CI_iOS" -only-test-configuration "English" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 13" ONLY_ACTIVE_ARCH=YES test
 
-    - name: Upload test results
-      uses: actions/upload-artifact@v2
-      with:
-        name: TestResults
-        path: $(BUILD_DIR)/$(SCHEME).xcresult
-
-    
+   
