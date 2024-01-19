@@ -34,20 +34,20 @@ jobs:
       
 
     - name: Generate Test Report
-        run: xchtmlreport TestResult.xcresult    
+      run: xchtmlreport TestResult.xcresult    
     
     - name: Deploy to GitHub Pages
-         uses: peaceiris/actions-gh-pages@v3.9.2
-         with:
-           github_token: ${{ secrets.GITHUB_TOKEN }}
-           publish_dir: ./
+      uses: peaceiris/actions-gh-pages@v3.9.2
+      with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         publish_dir: ./
            
     - name: HTML Report
-         run: echo "https://$GITHUB_REPOSITORY_OWNER.github.io/beautifying-xctest-results/$GITHUB_RUN_ID"
+      run: echo "https://$GITHUB_REPOSITORY_OWNER.github.io/beautifying-xctest-results/$GITHUB_RUN_ID"
 
     - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3.9.2
-        with:
+      uses: peaceiris/actions-gh-pages@v3.9.2
+      with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           exclude_assets: '.github,XCTestReport.xcodeproj,XCTestReport,XCTestReportUITests'
