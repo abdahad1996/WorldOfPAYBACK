@@ -2,14 +2,16 @@
   "configurations" : [
     {
       "id" : "70360525-BC08-44D6-A226-0F9E55FB6CFD",
-      "name" : "Configuration 1",
+      "name" : "English",
       "options" : {
-
+        "language" : "en",
+        "region" : "DE"
       }
     }
   ],
   "defaultOptions" : {
-
+    "language" : "en",
+    "region" : "DE"
   },
   "testTargets" : [
     {

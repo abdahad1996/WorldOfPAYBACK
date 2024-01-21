@@ -13,19 +13,47 @@ jobs:
   # This workflow contains a single job called "build-and-test"
   build-and-test:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: macos-13-xlarge
 
     timeout-minutes: 20
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         xcode-version: latest
+      
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_15.1.app
       
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
       
+      
+    - run: brew install xctesthtmlreport
+
     - name: Build and Test
-      run: xcodebuild clean build test -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14" ONLY_ACTIVE_ARCH=YES
+      run: xcodebuild test -project WorldOfPAYBACK.xcodeproj -scheme "CI_iOS" -testPlan "CI_iOS" -only-test-configuration "English" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 15" ONLY_ACTIVE_ARCH=YES -resultBundlePath TestResult | xcpretty
+      
+
+    - name: Generate Test Report
+      run: xchtmlreport TestResult.xcresult    
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3.9.2
+      with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         publish_dir: ./
+           
+    - name: HTML Report
+      run: echo "https://$GITHUB_REPOSITORY_OWNER.github.io/beautifying-xctest-results/$GITHUB_RUN_ID"
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3.9.2
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: '.github,XCTestReport.xcodeproj,XCTestReport,XCTestReportUITests'
+          destination_dir: ${{ github.run_id }}
+   
