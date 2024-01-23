@@ -568,8 +568,8 @@
 		65C62E202B5C92510016C6A7 /* TransactionViewSnapshotTests */ = {
 			isa = PBXGroup;
 			children = (
-				65C62E212B5C92510016C6A7 /* test_homeViewSuccessState.dark.png */,
 				65C62E222B5C92510016C6A7 /* test_homeViewSuccessState.light.png */,
+				65C62E212B5C92510016C6A7 /* test_homeViewSuccessState.dark.png */,
 				65C62E232B5C92510016C6A7 /* test_homeViewFailureState.dark.png */,
 				65C62E242B5C92510016C6A7 /* test_homeViewLoadingState.dark.png */,
 				65C62E252B5C92510016C6A7 /* test_homeViewIdleState.light.png */,

@@ -160,8 +160,8 @@ final class TransactionsViewModelTests: XCTestCase {
     ) {
         let loader = TransactionLoaderSpy()
         let sut = TransactionViewModel(transactionLoader: loader)
-//        trackForMemoryLeaks(sut, file: file, line: line)
-//        trackForMemoryLeaks(loader, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(loader, file: file, line: line)
         return (sut, loader)
     }
     
