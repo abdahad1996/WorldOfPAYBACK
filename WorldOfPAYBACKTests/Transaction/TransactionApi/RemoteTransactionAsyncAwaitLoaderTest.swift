@@ -19,7 +19,7 @@ final class RemoteTransactionAsyncAwaitLoaderTest: XCTestCase {
     
     func test_Init_DoesNotRequestDataFromUrl(){
         let anyValidResponse = (Data(),HTTPURLResponse(statusCode: 200))
-        let (_,client) = makeSUT(expectedResult: .success(anyValidResponse))
+        let (_,client) = makeSUT(clientResult: .success(anyValidResponse))
         
         
         XCTAssertTrue(client.requestedUrls.isEmpty)
@@ -30,7 +30,7 @@ final class RemoteTransactionAsyncAwaitLoaderTest: XCTestCase {
         let givenUrl = URL(string: "http://given-url.com")!
         let anyValidResponse = (Data(),HTTPURLResponse(statusCode: 200))
 
-        let (sut,client) = makeSUT(url: givenUrl,expectedResult: .success(anyValidResponse))
+        let (sut,client) = makeSUT(url: givenUrl,clientResult: .success(anyValidResponse))
         
         
        
@@ -46,7 +46,7 @@ final class RemoteTransactionAsyncAwaitLoaderTest: XCTestCase {
         let givenUrl = URL(string: "http://given-url.com")!
         let anyValidResponse = (Data(),HTTPURLResponse(statusCode: 200))
 
-        let (sut,client) = makeSUT(url: givenUrl,expectedResult: .success(anyValidResponse))
+        let (sut,client) = makeSUT(url: givenUrl,clientResult: .success(anyValidResponse))
         
             let _ = try? await sut.load()
             let _ = try? await sut.load()
@@ -59,7 +59,7 @@ final class RemoteTransactionAsyncAwaitLoaderTest: XCTestCase {
     func test_load_DeliversErrorOnClientError() async{
         let givenUrl = URL(string: "http://given-url.com")!
         let clientError = anyNSError()
-        let (sut,_) = makeSUT(url: givenUrl,expectedResult: .failure(clientError))
+        let (sut,_) = makeSUT(url: givenUrl,clientResult: .failure(clientError))
         
         await expect(sut: sut, expectedResult: .failure(RemoteTransactionLoader.Error.connectivity))
         
@@ -68,7 +68,7 @@ final class RemoteTransactionAsyncAwaitLoaderTest: XCTestCase {
     func test_load_DeliversErrorOnNon200Error() async{
         let givenUrl = URL(string: "http://given-url.com")!
         let anyResponse = (Data(),HTTPURLResponse(statusCode: 199))
-        let (sut,client) = makeSUT(url: givenUrl,expectedResult: .success(anyResponse))
+        let (sut,_) = makeSUT(url: givenUrl,clientResult: .success(anyResponse))
         
         await expect(sut: sut, expectedResult: .failure(RemoteTransactionLoader.Error.invalidData))
         
@@ -78,12 +78,10 @@ final class RemoteTransactionAsyncAwaitLoaderTest: XCTestCase {
                 
         let givenUrl = URL(string: "http://given-url.com")!
         let anyResponse = (Data("invalid json".utf8),HTTPURLResponse(statusCode: 200))
-        let (sut,client) = makeSUT(url: givenUrl,expectedResult: .success(anyResponse))
+        let (sut,client) = makeSUT(url: givenUrl,clientResult: .success(anyResponse))
         
         await expect(sut: sut, expectedResult: .failure(RemoteTransactionLoader.Error.invalidData))
-        
-        
-        
+    
         
     }
     
@@ -91,7 +89,7 @@ final class RemoteTransactionAsyncAwaitLoaderTest: XCTestCase {
         let givenUrl = URL(string: "http://given-url.com")!
         let validEmptyJson = makeItemsJSON([])
         let validResponse = (validEmptyJson,HTTPURLResponse(statusCode: 200))
-        let (sut,client) = makeSUT(url: givenUrl,expectedResult:.success(validResponse))
+        let (sut,client) = makeSUT(url: givenUrl,clientResult:.success(validResponse))
         
         await expect(sut: sut, expectedResult: .success([]))
     
@@ -108,15 +106,15 @@ final class RemoteTransactionAsyncAwaitLoaderTest: XCTestCase {
         let givenUrl = URL(string: "http://given-url.com")!
         let validJsonData = makeItemsJSON([item1.json,item2.json])
         let validResponse = (validJsonData,HTTPURLResponse(statusCode: 200))
-        let (sut,client) = makeSUT(url: givenUrl,expectedResult:.success(validResponse))
+        let (sut,client) = makeSUT(url: givenUrl,clientResult:.success(validResponse))
         
         await expect(sut: sut, expectedResult: .success([item1.model,item2.model]))
     }
     
     
     //MARK: HELPERS
-    private func makeSUT(url:URL = anyURL(),expectedResult:HTTPClient.Result,file: StaticString = #file, line: UInt = #line) -> (RemoteTransactionLoader,HTTPClientSpy) {
-        let client = HTTPClientSpy(result: expectedResult)
+    private func makeSUT(url:URL = anyURL(),clientResult:HTTPClient.Result,file: StaticString = #file, line: UInt = #line) -> (RemoteTransactionLoader,HTTPClientSpy) {
+        let client = HTTPClientSpy(result: clientResult)
         let sut = RemoteTransactionLoader(url: url, client: client)
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(client, file: file, line: line)
