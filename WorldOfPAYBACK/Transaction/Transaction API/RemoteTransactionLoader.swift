@@ -9,6 +9,7 @@ import Foundation
 
 public class RemoteTransactionLoader: TransactionLoader {
     
+    
     public typealias Result = TransactionLoader.Result
     
     private let url: URL
@@ -38,6 +39,22 @@ public class RemoteTransactionLoader: TransactionLoader {
                 completion(.failure(Error.connectivity))
             }
         }
+    }
+    
+    public func load() async throws -> [TransactionItem] {
+        guard let (data,response) =  try? await client.get(from: url) else{
+            throw Error.connectivity
+        }
+      
+        let result =  RemoteTransactionLoader.map(data, from: response)
+        switch result {
+        case .success(let transactions):
+            return transactions
+        case .failure:
+            throw Error.invalidData
+        }
+    
+            
     }
     
     private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {

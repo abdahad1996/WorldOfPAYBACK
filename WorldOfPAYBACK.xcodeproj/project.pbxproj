@@ -78,6 +78,7 @@
 		65C62E2E2B5C92510016C6A7 /* test_homeViewFailureState.light.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C62E262B5C92510016C6A7 /* test_homeViewFailureState.light.png */; };
 		65C62E2F2B5C92510016C6A7 /* test_homeViewLoadingState.light.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C62E272B5C92510016C6A7 /* test_homeViewLoadingState.light.png */; };
 		65C62E302B5C92510016C6A7 /* test_homeViewIdleState.dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C62E282B5C92510016C6A7 /* test_homeViewIdleState.dark.png */; };
+		65C62E342B5FFD300016C6A7 /* RemoteTransactionAsyncAwaitLoaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C62E332B5FFD300016C6A7 /* RemoteTransactionAsyncAwaitLoaderTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		65C62E262B5C92510016C6A7 /* test_homeViewFailureState.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_homeViewFailureState.light.png; sourceTree = "<group>"; };
 		65C62E272B5C92510016C6A7 /* test_homeViewLoadingState.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_homeViewLoadingState.light.png; sourceTree = "<group>"; };
 		65C62E282B5C92510016C6A7 /* test_homeViewIdleState.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_homeViewIdleState.dark.png; sourceTree = "<group>"; };
+		65C62E332B5FFD300016C6A7 /* RemoteTransactionAsyncAwaitLoaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteTransactionAsyncAwaitLoaderTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,7 +288,9 @@
 		541D625D2B514B570089CC07 /* TransactionApi */ = {
 			isa = PBXGroup;
 			children = (
+				65C62E322B5FFD0A0016C6A7 /* New Group */,
 				541D625E2B514BAA0089CC07 /* RemoteTransactionLoaderTest.swift */,
+				65C62E332B5FFD300016C6A7 /* RemoteTransactionAsyncAwaitLoaderTest.swift */,
 				541D62BC2B54ACC80089CC07 /* TransactionsEndPointTest.swift */,
 			);
 			path = TransactionApi;
@@ -580,6 +584,13 @@
 			path = TransactionViewSnapshotTests;
 			sourceTree = "<group>";
 		};
+		65C62E322B5FFD0A0016C6A7 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -814,6 +825,7 @@
 				541D62942B5406950089CC07 /* TransactionLoaderSpy.swift in Sources */,
 				541D63282B5534E90089CC07 /* NumberFormatterHelperTests.swift in Sources */,
 				541D62922B53830C0089CC07 /* TransactionViewModelTests.swift in Sources */,
+				65C62E342B5FFD300016C6A7 /* RemoteTransactionAsyncAwaitLoaderTest.swift in Sources */,
 				541D62A22B5466810089CC07 /* TransactionDetailViewModelTest.swift in Sources */,
 				541D625F2B514BAA0089CC07 /* RemoteTransactionLoaderTest.swift in Sources */,
 				541D632A2B5537B80089CC07 /* DateFormatterHelperTests.swift in Sources */,
