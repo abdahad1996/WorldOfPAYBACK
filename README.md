@@ -30,8 +30,8 @@
     2. [Integration Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#integration-tests)
         1. [End-to-End Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
     3. [Snapshot Tests](./Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
-9. [CI/CD](./Readme_Sections/CI_Security.md#cicd) (TODO / In Progress)
-10. [Security](./Readme_Sections/CI_Security.md#security) (TODO / In Progress)
+9. [CI/CD](./Readme_Sections/CI_Security.md#cicd)  
+10. [Security](./Readme_Sections/CI_Security.md#security) 
     1. [API key for TransactionApi](./Readme_Sections/CI_Security.md#api-key-for-google-places-api)
 
 
