@@ -1,4 +1,4 @@
-[![CI-iOS](https://github.com/abdahad1996/WorldOfPAYBACK/actions/workflows/ios.yml/badge.svg)](https://github.com/abdahad1996/WorldOfPAYBACK/actions/workflows/ios.yml) 
+[![CI-iOS](https://github.com/abdahad1996/WorldOfPAYBACK/actions/workflows/ios.yml/badge.svg)](https://github.com/abdahad1996/WorldOfPAYBACK/actions/workflows/ios.yml) (I used up all my free credits)
 
 <img width="484" alt="Screenshot 2024-01-16 at 08 26 51" src="https://github.com/abdahad1996/WorldOfPAYBACK/assets/28492677/8ab18738-881a-45af-b1d7-31d8833cf147">
 
